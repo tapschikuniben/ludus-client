@@ -1,0 +1,125 @@
+<div class="container">
+    <form class="needs-validation" #f="ngForm">
+        <div class="row">
+            <div class="col-md-5">
+                <input class="form-control input-text" type="number" placeholder="Number of Weeks" name="number_of_weeks">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <input type="file" id="image-btn" hidden/>
+                <label class="select-btn" for="image-btn">Upload Week Image #1</label> &nbsp;&nbsp;
+
+                <input type="file" id="image-btn" hidden/>
+                <label class="select-btn" for="image-btn">Upload Week Image #2</label> &nbsp;&nbsp;
+
+                <input type="file" id="image-btn" hidden/>
+                <label class="select-btn" for="image-btn">Upload Week Image #3</label>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Pack Title" name="pack_title" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Pack Instructor" name="pack_instructor">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <textarea class="form-control input-text" placeholder="Quick Description" name="pack_description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"></textarea>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="select-btn">Select Day</button> &nbsp;&nbsp;&nbsp;
+                <button class="select-btn">Article or Video?</button> &nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Category" name="category">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Title" name="title">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <textarea class="form-control input-text" placeholder="Quick Description" name="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <input type="file" id="video-btn" hidden/>
+                <!-- our custom upload button -->
+                <label class="select-btn" for="video-btn">Upload Video</label> &nbsp;&nbsp;&nbsp;
+
+
+
+                <input type="file" id="article-btn" hidden/>
+                <!-- our custom upload button -->
+                <label class="select-btn" for="article-btn">Select Article (.txt)</label>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex">
+                    <button class="select-btn"><span class="pin"><img src="./../../../../../assets/images/courses/you-will-need.svg"></span> &nbsp; You Will Need</button> &nbsp;&nbsp;&nbsp;
+
+                    <div class="options d-flex">
+                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/soccer-field.svg"></div>
+
+                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/cone.svg"></div>
+
+                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/football-ball.svg"></div>
+
+                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/living-room.svg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <input class="form-control input-text" placeholder="Points Assigned" type="number" name="title" required>
+            </div>
+
+            <div class="col-md-3">
+                <button class="select-btn">Save Day</button>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <button class="add-btn">Save Pack</button> &nbsp;&nbsp;&nbsp;
+                <button class="delete-btn">Delete Pack</button>
+            </div>
+        </div>
+    </form>
+</div>

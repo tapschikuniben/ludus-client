@@ -1,0 +1,66 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="'navigation'" [mode]="'side'" opened>
+        <mat-toolbar class="d-flex justify-content-center">
+
+            <div class="dashboard-title d-flex">
+                <div class="d-flex align-items-center"><img src="./../../../../assets/images/sidebar/triangle.svg"></div>
+                <div class="dashboard-title">Dashboard</div>
+            </div>
+
+
+        </mat-toolbar>
+
+        <mat-nav-list>
+
+            <div class="logo-holder d-flex justify-content-center">
+                <div class="circle d-flex justify-content-center align-items-center">
+                    <div class="ludus">Ludus</div>
+                </div>
+            </div>
+
+            <div class="user text-center">
+                <div class="username">Tapiwa Chikuni</div>
+                <div class="email">tapschikuniben@gmail.com</div>
+            </div>
+
+            <div class="list">
+                <div class="link d-flex align-items-center">
+                    <span class="material-icons"> grid_view </span> &nbsp; <span>Dashboard</span>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="sport-btn">Football</button>
+                </div>
+
+                <div class="link d-flex align-items-center"> <a [routerLink]="['/courses']" [routerLinkActive]="['active']">Courses</a></div>
+
+                <div class="link d-flex align-items-center"> <a [routerLink]="['/packs']" [routerLinkActive]="['active']">Packs</a></div>
+
+                <div class="link d-flex align-items-center"> <a [routerLink]="['/users']" [routerLinkActive]="['active']">Users</a></div>
+
+                <div class="link d-flex align-items-center"> <a [routerLink]="['/points']" [routerLinkActive]="['active']">Point</a></div>
+
+                <div class="link d-flex align-items-center">
+                    <span class="material-icons"> arrow_forward </span> &nbsp; <span>Log Out</span>
+                    <!-- <span> <img src="./../../../../assets/images/sidebar/path.svg"> </span> &nbsp; <span>Log Out</span> -->
+                </div>
+            </div>
+
+
+
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="d-flex">
+
+        <div class="divider">
+        </div>
+
+        <div class="body">
+            <div class="body-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

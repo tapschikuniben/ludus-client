@@ -1,0 +1,47 @@
+.container {
+    height: 80vh;
+}
+
+.course-holder {
+    background-color: #d2eaaa;
+    padding: 5px 20px;
+    border-radius: 15px;
+    width: 350px;
+    margin-bottom: 15px;
+}
+
+.content {
+    margin: 0 20px;
+    width: 290px;
+}
+
+.content .course-title {
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
+    color: #2A2A2E;
+}
+
+.content .course-tutor {
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
+    color: rgba(42, 42, 46, 0.4);
+}
+
+.edit {
+    color: #29A0AE;
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-btn {
+    background-color: #93C741;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 30px;
+    font-family: 'Mulish-Regular';
+    font-size: 16px;
+    line-height: 30px;
+    cursor: pointer;
+}

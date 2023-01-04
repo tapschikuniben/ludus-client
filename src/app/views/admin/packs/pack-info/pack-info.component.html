@@ -1,0 +1,25 @@
+<div class="container d-flex align-items-center">
+
+    <div class="outer-courses">
+        <div class="course-holder d-flex" *ngFor="let pack of packs">
+            <div class="image">
+                <img src="./../../../../../assets/images/courses/course-1.png" width="43px" height="43px">
+            </div>
+            <div class="content">
+                <div class="course-title">
+                    <span>{{pack.title}}</span>
+                </div>
+
+                <div class="course-tutor">
+                    <span>{{pack.instructor}}</span>
+                </div>
+            </div>
+            <div class="edit d-flex align-items-center"><span (click)="editPack()">Edit</span></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-6 add-btn-holder">
+    <button class="add-btn" (click)="addPack()">Add Pack</button> &nbsp;&nbsp;&nbsp;
+</div>

@@ -1,0 +1,118 @@
+<div class="container">
+    <form class="needs-validation" #f="ngForm">
+        <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Number of Days</mat-label>
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Number of Days" [(ngModel)]="course.number_of_days" name="number_of_days">
+            </div>
+        </div>
+
+        <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Course Title</mat-label>
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Course Title" [(ngModel)]="course.course_title" name="course_title" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Course Instructor</mat-label>
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Course Instructor" [(ngModel)]="course.course_instructor" name="course_instructor">
+            </div>
+        </div>
+
+        <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Quick Description</mat-label>
+            <div class="col-md-5">
+                <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="course.course_description" name="course_description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"></textarea>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="select-btn">Select Day</button> &nbsp;&nbsp;&nbsp;
+                <button class="select-btn">Article or Video?</button> &nbsp;&nbsp;&nbsp;
+                <button class="select-btn">Upload Image</button> &nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Tags</mat-label>
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Tags" [(ngModel)]="course.tags" name="tags">
+            </div>
+        </div>
+
+        <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Title</mat-label>
+            <div class="col-md-5">
+                <input class="form-control input-text" placeholder="Title" [(ngModel)]="course.title" name="title">
+            </div>
+        </div>
+
+        <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Quick Description</mat-label>
+            <div class="col-md-5">
+                <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="course.description" name="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;What You Will Learn</mat-label>
+            <div class="col-md-5">
+                <textarea class="form-control input-text" placeholder="What You Will Learn" [(ngModel)]="course.learning" name="learning" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+            </div>
+        </div>
+
+
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <button class="select-btn">Upload Video</button> &nbsp;&nbsp;&nbsp;
+                <button class="select-btn">Select Article</button> &nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex">
+                    <button class="select-btn"><span class="pin"><img src="./../../../../../assets/images/courses/you-will-need.svg"></span> &nbsp; You Will Need</button> &nbsp;&nbsp;&nbsp;
+
+                    <div class="options d-flex">
+                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/soccer-field.svg"></div>
+                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/cone.svg"></div>
+                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/football-ball.svg"></div>
+                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/living-room.svg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <mat-label> &nbsp;&nbsp;&nbsp;Points Assigned</mat-label>
+                <input class="form-control input-text" placeholder="Points Assigned" [(ngModel)]="course.points_assigned" type="number" name="title" required>
+            </div>
+
+            <div class="col-md-3">
+                <br />
+                <button class="select-btn">Save Day</button>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <button class="add-btn" (click)="updateCourse(course)">Update Course</button> &nbsp;&nbsp;&nbsp;
+
+                <button class="delete-btn" (click)="confirmDialogProfile(course)">Delete Course</button>
+            </div>
+        </div>
+    </form>
+</div>

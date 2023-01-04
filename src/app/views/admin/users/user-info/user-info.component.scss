@@ -1,0 +1,81 @@
+.container {
+    height: 80vh;
+}
+
+td {
+    // border: red 1px solid;
+    width: calc(100% / 3);
+    vertical-align: middle;
+}
+
+.username {
+    font-family: 'Mulish-Medium';
+    font-size: 16px;
+    color: #27282E;
+}
+
+.sport {
+    font-family: 'Mulish-Medium';
+    font-size: 16px;
+    color: #7F8290;
+}
+
+.select-btn {
+    background-color: #93C741;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 30px;
+    font-family: 'Mulish-Medium';
+    font-size: 16px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.holder {
+    width: 100%;
+}
+
+.profile {
+    background: rgba(147, 199, 65, 0.46);
+    border-radius: 18px;
+    padding: 14px;
+    position: relative;
+}
+
+.profile-name {
+    font-family: 'Mulish-Medium';
+    font-size: 16px;
+    line-height: 30px;
+    color: #27282E;
+}
+
+.profile-text-grey {
+    font-family: 'Poppins-Medium';
+    color: rgba(42, 42, 46, 0.4);
+}
+
+.profile-text {
+    font-family: 'Poppins-Medium';
+    color: #27282E;
+}
+
+.profile-content {
+    padding: 0 15px;
+}
+
+.profile-content>div {
+    margin-bottom: 5px;
+}
+
+.profile .close-btn {
+    background-color: rgba(147, 199, 65, 0.46);
+    border-radius: 15px;
+    padding: 6px 40px;
+    color: #29A0AE;
+    font-family: 'Poppins-Medium';
+    font-size: 15px;
+    position: absolute;
+    right: 50px;
+    border: none;
+}

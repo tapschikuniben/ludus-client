@@ -1,0 +1,25 @@
+<div class="container d-flex align-items-center">
+
+    <div class="outer-courses">
+        <div class="course-holder d-flex" *ngFor="let card of cards">
+            <div class="image">
+                <img src="./../../../../../assets/images/cards/card-image-1.png" width="43px" height="43px">
+            </div>
+            <div class="content">
+                <div class="course-title">
+                    <span>{{card.title}}</span>
+                </div>
+
+                <div class="course-tutor">
+                    <span>{{card.points}} Points</span>
+                </div>
+            </div>
+            <div class="edit d-flex align-items-center"><span (click)="editCard()">Edit</span></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-6 add-btn-holder">
+    <button class="add-btn" (click)="addCard()">Add Card</button> &nbsp;&nbsp;&nbsp;
+</div>

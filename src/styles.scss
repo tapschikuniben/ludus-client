@@ -1,0 +1,84 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Mulish Font
+@font-face {
+    font-family: 'Mulish-ExtraBold';
+    src: url('./assets/fonts/mulish/Mulish-ExtraBold.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mulish-Bold';
+    src: url('./assets/fonts/mulish/Mulish-Bold.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mulish-SemiBold';
+    src: url('./assets/fonts/mulish/Mulish-SemiBold.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mulish-Medium';
+    src: url('./assets/fonts/mulish/Mulish-Medium.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mulish-Regular';
+    src: url('./assets/fonts/mulish/Mulish-Regular.ttf');
+    font-display: swap;
+}
+
+// Poppins font
+@font-face {
+    font-family: 'Poppins-ExtraBold';
+    src: url('./assets/fonts/poppins/Poppins-ExtraBold.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url('./assets/fonts/poppins/Poppins-Bold.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins-SemiBold';
+    src: url('./assets/fonts/poppins/Poppins-SemiBold.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins-Medium';
+    src: url('./assets/fonts/poppins/Poppins-Medium.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('./assets/fonts/poppins/Poppins-Regular.ttf');
+    font-display: swap;
+}
+
+// styles
+.input-text {
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
+}
+
+.date-text {
+    font-family: 'Poppins-Regular';
+    font-size: 12px;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,0 +1,53 @@
+<div class="container d-flex justify-content-center align-items-center">
+
+    <div class="holder">
+        <div class="profile d-flex" *ngIf="returnUser && show">
+
+            <button class="close-btn" (click)="close()">x</button>
+
+            <div class="profile-image">
+                <img src="./../../../../../assets/images/users/image-1.png">
+            </div>
+
+            <div class="profile-content">
+                <div>
+                    <label class="profile-name">{{returnUser[0].username}}</label>
+                </div>
+
+                <div>
+                    <label class="profile-text-grey">Registered Sports: {{returnUser[0].sport}}</label>
+                </div>
+
+                <div>
+                    <label class="profile-text-grey">Profile Points: {{returnUser[0].profile_points}}</label>
+                </div>
+
+                <div>
+                    <label class="profile-text">Email: {{returnUser[0].email}}</label>
+                </div>
+
+                <div>
+                    <label class="profile-text">D.O.B.: {{returnUser[0].dob}}</label>
+                </div>
+
+                <div>
+                    <label class="profile-text">Nationality: {{returnUser[0].nationality}}</label>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td class="username">{{user.username}}</td>
+                    <td class="sport">{{user.sport}}</td>
+                    <td> <button class="select-btn" (click)="viewUser(user)">View Profile</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
