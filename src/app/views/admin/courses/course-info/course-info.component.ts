@@ -12,8 +12,10 @@ import { CourseService } from 'src/app/services/course.service';
 })
 export class CourseInfoComponent {
 
-  public courses: any;
+  public courses: any = [];
   public courseImages: any;
+  public loading: boolean = false;
+  public available_courses: boolean = false;
 
   constructor(
     private courseService: CourseService,
@@ -31,8 +33,19 @@ export class CourseInfoComponent {
   }
 
   getCourses() {
+    this.loading = true;
     this.courseService.getAllCourses().subscribe(returned => {
-      this.courses = returned;
+
+      if (returned.length > 0) {
+        this.courses = returned;
+
+        this.available_courses = true;
+
+      } else {
+        this.available_courses = false;
+      }
+
+      this.loading = false;
     })
   }
 

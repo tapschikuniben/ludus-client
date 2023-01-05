@@ -30,6 +30,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -93,6 +94,7 @@ import { CardInfoComponent } from './points/card-info/card-info.component';
     MatChipsModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatProgressSpinnerModule,
     RouterModule,
     MaterialFileInputModule
   ]

@@ -1,11 +1,12 @@
 <div class="container d-flex align-items-center">
 
-    <div class="outer-courses">
-        <div class="course-holder d-flex" *ngFor="let course of courses">
-            <!-- <div class="image">
-                <img src="./../../../../../assets/images/courses/course-1.png" width="43px" height="43px">
-            </div> -->
+    <div class="no-course d-flex justify-content-center align-items-center" *ngIf="!available_courses">
+        <span>You have not added any courses yet.</span>
+    </div>
 
+
+    <div class="outer-courses" *ngIf="available_courses">
+        <div class="course-holder d-flex" *ngFor="let course of courses">
             <div *ngFor="let course_image of courseImages">
                 <div class="image d-flex align-items-center" *ngIf="course.linking_id == course_image.linking_id">
                     <img [src]="course_image.image" alt="" class="img-fluid" width="100%" height="100%">
