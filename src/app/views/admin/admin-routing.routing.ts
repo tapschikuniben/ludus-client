@@ -10,10 +10,16 @@ import { PackInfoComponent } from './packs/pack-info/pack-info.component';
 import { CardInfoComponent } from './points/card-info/card-info.component';
 import { EditCardComponent } from './points/edit-card/edit-card.component';
 import { NewCardComponent } from './points/new-card/new-card.component';
+import { AdminLoginComponent } from './signin/admin-login/admin-login.component';
 import { UserInfoComponent } from './users/user-info/user-info.component';
 
 
 const AdminRoutes: Routes = [
+
+    {
+        path: 'admin-login', component: AdminLoginComponent
+    },
+
     {
         path: '', component: AdminLayoutComponent, children: [
             {
@@ -55,7 +61,7 @@ const AdminRoutes: Routes = [
             },
             {
                 path: 'points', component: CardInfoComponent
-            },
+            }
         ]
     }
 ]

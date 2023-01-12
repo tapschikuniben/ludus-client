@@ -40,7 +40,7 @@
 
                 <div class="link d-flex align-items-center"> <a [routerLink]="['/points']" [routerLinkActive]="['active']">Point</a></div>
 
-                <div class="link d-flex align-items-center">
+                <div class="link d-flex align-items-center" (click)="Logout()">
                     <span class="material-icons"> arrow_forward </span> &nbsp; <span>Log Out</span>
                     <!-- <span> <img src="./../../../../assets/images/sidebar/path.svg"> </span> &nbsp; <span>Log Out</span> -->
                 </div>

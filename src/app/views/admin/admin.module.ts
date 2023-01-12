@@ -44,6 +44,7 @@ import { NewCardComponent } from './points/new-card/new-card.component';
 import { EditCardComponent } from './points/edit-card/edit-card.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { CardInfoComponent } from './points/card-info/card-info.component';
+import { AdminLoginComponent } from './signin/admin-login/admin-login.component';
 
 
 
@@ -61,7 +62,8 @@ import { CardInfoComponent } from './points/card-info/card-info.component';
     NewCardComponent,
     EditCardComponent,
     ConfirmDialogComponent,
-    CardInfoComponent
+    CardInfoComponent,
+    AdminLoginComponent
   ],
   imports: [
     CommonModule,

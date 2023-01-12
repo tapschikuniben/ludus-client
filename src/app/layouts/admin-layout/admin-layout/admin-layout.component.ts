@@ -1,5 +1,6 @@
 import { Component, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,9 +12,16 @@ export class AdminLayoutComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   @HostBinding('class') className = '';
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  Logout() {
+    const url = `/admin-login`;
+    this.router.navigate([url]);
   }
 
 }
