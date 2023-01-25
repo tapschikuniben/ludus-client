@@ -1,12 +1,16 @@
 <mat-dialog-content>
     <div class="row">
         <div class="col-md-12">
-            <mat-label class="body-text">{{message}}</mat-label>
+            <mat-label class="header">{{message}}</mat-label>
         </div>
     </div>
     <div class="section-devider"></div>
 
-    <button mat-button class="select-article-btn button-text" (click)="onSelectArticle()">Article</button>
-    <button mat-button class="select-video-btn button-text" (click)="onSelectVideo()">Video</button>
+    <div class="d-flex justify-content-center">
+        <button mat-button class="select-article-btn button-text" (click)="onSelectArticle()">Article</button>
+        <button mat-button class="select-video-btn button-text" (click)="onSelectVideo()">Video</button>
+        <button mat-button class="select-both-btn button-text" (click)="onSelectBoth()">Both</button>
+    </div>
+
 
 </mat-dialog-content>

@@ -1,0 +1,19 @@
+<div class="header-holder row">
+    <div class="col-md-12">
+        <mat-label class="header">Select Day Number</mat-label>
+    </div>
+</div>
+
+<div class="devider-holder d-flex justify-content-center">
+    <div class="section-devider"></div>
+</div>
+
+<div class="cards-holder row d-flex justify-content-center">
+    <mat-card class="d-flex justify-content-center align-items-center" *ngFor="let number of numbers, index as i" (click)="selectedDay(i + 1)" [ngClass]="{'day-card': (i + 1) === currentDay  }">
+        <mat-card-content> {{i + 1}} </mat-card-content>
+    </mat-card>
+</div>
+
+<div class="button-holder d-flex justify-content-end">
+    <button class="select-btn" (click)="onClose()">Done</button>
+</div>

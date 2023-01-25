@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { CourseComponent } from './courses/course/course.component';
 import { CourseInfoComponent } from './courses/course-info/course-info.component';
 import { NewCourseComponent } from './courses/new-course/new-course.component';
@@ -45,6 +45,8 @@ import { EditCardComponent } from './points/edit-card/edit-card.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { CardInfoComponent } from './points/card-info/card-info.component';
 import { AdminLoginComponent } from './signin/admin-login/admin-login.component';
+import { SelectDayDialogComponent } from './courses/select-day-dialog/select-day-dialog.component';
+import { ViewSessionDialogComponent } from './courses/view-session-dialog/view-session-dialog.component';
 
 
 
@@ -63,7 +65,9 @@ import { AdminLoginComponent } from './signin/admin-login/admin-login.component'
     EditCardComponent,
     ConfirmDialogComponent,
     CardInfoComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    SelectDayDialogComponent,
+    ViewSessionDialogComponent
   ],
   imports: [
     CommonModule,
@@ -99,6 +103,8 @@ import { AdminLoginComponent } from './signin/admin-login/admin-login.component'
     MatProgressSpinnerModule,
     RouterModule,
     MaterialFileInputModule
-  ]
+  ],
+  // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [],
 })
 export class AdminModule { }

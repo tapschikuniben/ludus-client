@@ -1,0 +1,61 @@
+.cards-holder {
+    width: 100%;
+    margin: 0;
+}
+
+.header-holder {
+    margin: 0;
+    width: 100%;
+    padding: 20px 10px;
+    margin-bottom: 0;
+}
+
+mat-card {
+    padding: 5px;
+    cursor: pointer;
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
+    color: #93C741;
+    box-shadow: 0px 14px 20px rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+}
+
+.day-card {
+    background-color: #93C741;
+    color: #ffffff;
+}
+
+.button-holder {
+    padding: 5px;
+}
+
+.select-btn {
+    background-color: #93C741;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 30px;
+    font-family: 'Mulish-Regular';
+    font-size: 16px;
+    line-height: 30px;
+    margin-top: 10px;
+}
+
+.header {
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
+}
+
+.devider-holder {
+    width: 100%;
+}
+
+.section-devider {
+    height: 3px;
+    background-color: #93C741;
+    margin-bottom: 20px;
+    width: 95%;
+}

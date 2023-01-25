@@ -24,4 +24,7 @@ export class ArticleVideoSelectDialogComponent {
     this.dialogRef.close({ data: "Video" });
   }
 
+  onSelectBoth(): void {
+    this.dialogRef.close({ data: "ArticleAndVideo" });
+  }
 }
