@@ -47,6 +47,9 @@ const AdminRoutes: Routes = [
                 path: 'packs', component: PackInfoComponent
             },
 
+            {
+                path: 'edit-pack/:id', component: EditPackComponent
+            },
 
             {
                 path: 'users', component: UserInfoComponent

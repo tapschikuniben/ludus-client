@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Pack } from 'src/app/models/pack.model';
+import { PackService } from 'src/app/services/pack.service';
 
-interface Pack {
-  _id: string;
-  title: string;
-  instructor: string;
-}
 
 @Component({
   selector: 'app-pack-info',
@@ -16,23 +13,25 @@ export class PackInfoComponent {
 
   public pack = { _id: '', title: '', instructor: '' };
   public returnPack: any;
+  public packs: Pack[] = []
 
   constructor(
-    private router: Router
+    private router: Router,
+    private packService: PackService
   ) { }
 
   ngOnInit(): void {
-
+    this.getPacks();
   }
 
+  getPacks() {
+    this.packService.getAllPacks().subscribe((returnedPacks: any) => {
+      this.packs = returnedPacks;
+    })
+  }
 
-  packs: Pack[] = [
-    { _id: '1', title: 'Welcome To Trenches', instructor: 'Fergus Douchebag' },
-    { _id: '2', title: 'Pack Name #2', instructor: 'Nathaneal Down' }
-  ]
-
-  editPack() {
-    const url = `/edit-pack/`;
+  editPack(pack: any) {
+    const url = `/edit-pack/${pack.id}`;
     this.router.navigate([url]);
   }
 

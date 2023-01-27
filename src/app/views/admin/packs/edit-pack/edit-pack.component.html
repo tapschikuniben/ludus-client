@@ -1,8 +1,9 @@
 <div class="container">
     <form class="needs-validation" #f="ngForm">
         <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Number of Weeks</mat-label>
             <div class="col-md-5">
-                <input class="form-control input-text" type="number" placeholder="Number of Weeks" name="number_of_weeks">
+                <input class="form-control input-text" type="number" [(ngModel)]="pack.number_of_weeks" name="number_of_weeks">
             </div>
         </div>
 
@@ -22,20 +23,23 @@
         </div>
 
         <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Pack Title</mat-label>
             <div class="col-md-5">
-                <input class="form-control input-text" placeholder="Pack Title" name="pack_title" required>
+                <input class="form-control input-text" [(ngModel)]="pack.pack_title" name="pack_title" required>
             </div>
         </div>
 
         <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Pack Instructor</mat-label>
             <div class="col-md-5">
-                <input class="form-control input-text" placeholder="Pack Instructor" name="pack_instructor">
+                <input class="form-control input-text" placeholder="Pack Instructor" [(ngModel)]="pack.pack_instructor" name="pack_instructor">
             </div>
         </div>
 
         <div class="row">
+            <mat-label> &nbsp;&nbsp;&nbsp;Quick Description</mat-label>
             <div class="col-md-5">
-                <textarea class="form-control input-text" placeholder="Quick Description" name="pack_description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"></textarea>
+                <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="pack.description" name="pack_description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"></textarea>
             </div>
         </div>
 

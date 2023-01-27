@@ -7,14 +7,14 @@
             </div>
             <div class="content">
                 <div class="course-title">
-                    <span>{{pack.title}}</span>
+                    <span>{{pack.pack_title}}</span>
                 </div>
 
                 <div class="course-tutor">
-                    <span>{{pack.instructor}}</span>
+                    <span>{{pack.pack_instructor}}</span>
                 </div>
             </div>
-            <div class="edit d-flex align-items-center"><span (click)="editPack()">Edit</span></div>
+            <div class="edit d-flex align-items-center"><span (click)="editPack(pack)">Edit</span></div>
         </div>
     </div>
 
