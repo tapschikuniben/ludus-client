@@ -2,12 +2,10 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseArticle } from 'src/app/models/course-article.model';
-import { CourseDaySession } from 'src/app/models/course-day-session.model';
 import { CourseImage } from 'src/app/models/course-image.model';
 import { CourseVideo } from 'src/app/models/course-video.model';
-import { Course } from 'src/app/models/course.model';
+import { Course, CourseDaySession } from 'src/app/models/course.model';
 import { CourseArticleService } from 'src/app/services/course-article.service';
-import { CourseSessionService } from 'src/app/services/course-day-session.service';
 import { CourseImageService } from 'src/app/services/course-image.service';
 import { CourseVideoService } from 'src/app/services/course-video.service';
 import { CourseService } from 'src/app/services/course.service';
@@ -52,7 +50,6 @@ export class EditCourseComponent {
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
-    private courseSessionService: CourseSessionService,
     private dialog: MatDialog,
     private imageService: CourseImageService,
     private articleService: CourseArticleService,
@@ -62,7 +59,6 @@ export class EditCourseComponent {
 
   ngOnInit(): void {
     this.getCourse();
-    this.getCourseSessions();
 
     this.initCourseImage();
     this.initCourse();
@@ -107,13 +103,12 @@ export class EditCourseComponent {
       course_title: "",
       course_instructor: "",
       course_description: "",
+      course_daily_sessions: []
     }
   }
 
   initCourseSession() {
     this.courseSession = {
-      _id: "",
-      course_id: "",
       category: "",
       day: "",
       is_article_or_vedio: "",
@@ -134,18 +129,12 @@ export class EditCourseComponent {
 
     this.courseService.getCourseById(courseId).subscribe(returned => {
       this.course = returned;
+
+      this.courseSessions = this.course.course_daily_sessions;
+
     })
   }
 
-  getCourseSessions() {
-    const courseId = this.route.snapshot.paramMap.get('id');
-
-    this.courseSessionService.getAllCourseSessions().subscribe(returned => {
-      this.courseSessions = returned;
-
-      console.log(this.courseSessions);
-    })
-  }
 
   deleteCourse(course: any) {
     this.courseService.deleteCourse(course._id).subscribe();
@@ -234,14 +223,14 @@ export class EditCourseComponent {
   }
 
   saveDay(daySession: any) {
-    this.courseSession.course_id = this.route.snapshot.paramMap.get('id');
+
     this.courseSession.day = this.selectedDay;
+    this.course.course_daily_sessions.push(daySession);
 
-    this.courseSessionService.addCourseSession(daySession).subscribe(returnedDay => {
-      console.log(returnedDay);
-
-      this.initCourseSession();
+    this.courseService.updateCourse(this.course).subscribe(returnedCourse => {
+      console.log(returnedCourse);
     })
+
   }
 
 }

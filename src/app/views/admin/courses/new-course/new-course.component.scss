@@ -46,6 +46,10 @@ form {
     cursor: pointer;
 }
 
+.add-btn:disabled {
+    background-color: #dce0da;
+}
+
 .delete-btn {
     background-color: #FF0000;
     color: #ffffff;

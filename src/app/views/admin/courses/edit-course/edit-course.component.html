@@ -116,11 +116,6 @@
 
             <br />
             <div class="row">
-                <div class="col-md-6">
-                    <mat-label> &nbsp;&nbsp;&nbsp;Points Assigned</mat-label>
-                    <input class="form-control input-text" placeholder="Points Assigned" [(ngModel)]="courseSession.points_assigned" type="number" name="title" required>
-                </div>
-
                 <div class="col-md-5">
                     <br />
                     <button class="select-btn" (click)="saveDay(courseSession)">Save Day</button>
@@ -141,24 +136,28 @@
     </div>
 
 
-    <div class="table-holder col-lg-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Day Number</th>
-                    <th>Title</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let courseSession of courseSessions">
-                    <td>{{courseSession.day}}</td>
-                    <td>{{courseSession.title}}</td>
-                    <td>
-                        <mat-icon (click)="viewSession(courseSession)">visibility</mat-icon>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-lg-5">
+        <div class="table-holder">
+            <span class="header"><h2>Daily Sessions</h2></span>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Title</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let courseSession of courseSessions">
+                        <td>{{courseSession.day}}</td>
+                        <td>{{courseSession.title}}</td>
+                        <td>
+                            <mat-icon (click)="viewSession(courseSession)">visibility</mat-icon>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Pack } from 'src/app/models/pack.model';
+import { Pack, PackDaySession } from 'src/app/models/pack.model';
 import { PackService } from 'src/app/services/pack.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { PackService } from 'src/app/services/pack.service';
 export class EditPackComponent {
 
   public pack!: Pack;
+  public packSession!: PackDaySession;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +33,21 @@ export class EditPackComponent {
       pack_title: '',
       pack_instructor: '',
       description: '',
+      pack_daily_sessions: []
+    }
+  }
+
+  initPackSession() {
+    this.packSession = {
+      category: "",
+      day: "",
+      is_article_or_vedio: "",
+      title: "",
+      description: "",
+      preferences: [],
+      imageUrl: "",
+      vedioUrl: "",
+      articleUrl: "",
     }
   }
 

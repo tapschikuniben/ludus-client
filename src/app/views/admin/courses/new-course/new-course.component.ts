@@ -9,6 +9,7 @@ import { CourseArticleService } from 'src/app/services/course-article.service';
 import { CourseImageService } from 'src/app/services/course-image.service';
 import { CourseVideoService } from 'src/app/services/course-video.service';
 import { CourseService } from 'src/app/services/course.service';
+import { NotifierService } from 'src/app/services/notifier.service';
 import { ArticleVideoSelectDialogComponent } from '../article-video-select-dialog/article-video-select-dialog.component';
 
 
@@ -26,7 +27,8 @@ export class NewCourseComponent {
   constructor(
     private dialog: MatDialog,
     private courseService: CourseService,
-    private router: Router
+    private router: Router,
+    private notifier: NotifierService,
   ) { }
 
   ngOnInit(): void {
@@ -41,15 +43,17 @@ export class NewCourseComponent {
       course_title: "",
       course_instructor: "",
       course_description: "",
+      course_daily_sessions: []
     }
   }
 
   saveCourse() {
-    this.courseService.addCourse(this.course).subscribe(returnedCourse => {
-      const url = `/courses`;
+    this.courseService.addCourse(this.course).subscribe((returnedCourse: any) => {
+      const url = `/edit-course/${returnedCourse._id}`;
       this.router.navigate([url]);
-    })
 
+      this.notifier.Notification("success", "Course successfully added");
+    })
   }
 
 }

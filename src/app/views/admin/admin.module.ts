@@ -47,6 +47,8 @@ import { CardInfoComponent } from './points/card-info/card-info.component';
 import { AdminLoginComponent } from './signin/admin-login/admin-login.component';
 import { SelectDayDialogComponent } from './courses/select-day-dialog/select-day-dialog.component';
 import { ViewSessionDialogComponent } from './courses/view-session-dialog/view-session-dialog.component';
+import { NotifierService } from 'src/app/services/notifier.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -102,9 +104,10 @@ import { ViewSessionDialogComponent } from './courses/view-session-dialog/view-s
     MatRadioModule,
     MatProgressSpinnerModule,
     RouterModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    MatSnackBarModule
   ],
   // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
-  providers: [],
+  providers: [NotifierService],
 })
 export class AdminModule { }

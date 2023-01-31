@@ -13,7 +13,9 @@ export class PackInfoComponent {
 
   public pack = { _id: '', title: '', instructor: '' };
   public returnPack: any;
-  public packs: Pack[] = []
+  public packs: Pack[] = [];
+  public loading: boolean = false;
+  public available_packs: boolean = false;
 
   constructor(
     private router: Router,
@@ -25,8 +27,17 @@ export class PackInfoComponent {
   }
 
   getPacks() {
+    this.loading = true;
     this.packService.getAllPacks().subscribe((returnedPacks: any) => {
-      this.packs = returnedPacks;
+
+      if (returnedPacks.length > 0) {
+        this.packs = returnedPacks;
+
+        this.available_packs = true;
+      } else {
+        this.available_packs = false;
+      }
+      this.loading = false;
     })
   }
 

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CourseDaySession } from 'src/app/models/course-day-session.model';
+import { CourseDaySession } from 'src/app/models/course.model';
 
 interface SessionCategory {
   value: string;
@@ -40,8 +40,6 @@ export class ViewSessionDialogComponent {
 
   initCourseSession() {
     this.courseSession = {
-      _id: this.data._id,
-      course_id: this.data.course_id,
       category: this.data.category,
       day: this.data.day,
       is_article_or_vedio: this.data.is_article_or_vedio,

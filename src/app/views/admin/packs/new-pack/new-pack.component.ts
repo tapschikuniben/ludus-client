@@ -25,16 +25,18 @@ export class NewPackComponent {
     this.pack = {
       _id: "",
       packs_images: [],
-      number_of_weeks: 0,
+      number_of_weeks: null,
       pack_title: "",
       pack_instructor: "",
-      description: ""
+      description: "",
+      pack_daily_sessions: []
     }
   }
 
   SavePack(pack: any) {
     this.packService.addPack(pack).subscribe(returned_pack => {
-      console.log(returned_pack);
+      const url = `/packs`;
+      this.router.navigate([url]);
     })
   }
 

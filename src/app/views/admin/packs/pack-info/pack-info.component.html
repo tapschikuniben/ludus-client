@@ -1,6 +1,10 @@
 <div class="container d-flex align-items-center">
 
-    <div class="outer-courses">
+    <div class="no-course d-flex justify-content-center align-items-center" *ngIf="!available_packs">
+        <span>You have not added any packs yet.</span>
+    </div>
+
+    <div class="outer-courses" *ngIf="available_packs">
         <div class="course-holder d-flex" *ngFor="let pack of packs">
             <div class="image">
                 <img src="./../../../../../assets/images/packs/packs-image-1.png" width="43px" height="43px">

@@ -2,7 +2,7 @@
     <form class="needs-validation" #f="ngForm">
         <div class="row">
             <div class="col-md-5">
-                <input class="form-control input-text" type="number" placeholder="Number of Days" [(ngModel)]="course.number_of_days" name="number_of_days">
+                <input class="form-control input-text" type="number" placeholder="Number of Days" [(ngModel)]="course.number_of_days" name="number_of_days" required>
             </div>
         </div>
 
@@ -14,19 +14,19 @@
 
         <div class="row">
             <div class="col-md-5">
-                <input class="form-control input-text" placeholder="Course Instructor" [(ngModel)]="course.course_instructor" name="course_instructor">
+                <input class="form-control input-text" placeholder="Course Instructor" [(ngModel)]="course.course_instructor" name="course_instructor" required>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-5">
-                <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="course.course_description" name="course_description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"></textarea>
+                <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="course.course_description" name="course_description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" required></textarea>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <button class="add-btn" (click)="saveCourse()">Add Course</button> &nbsp;&nbsp;&nbsp;
+                <button class="add-btn" (click)="saveCourse()" [disabled]="!f.valid">Add Course</button> &nbsp;&nbsp;&nbsp;
             </div>
         </div>
     </form>
