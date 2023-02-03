@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CourseDaySession } from 'src/app/models/course.model';
+import { CourseService } from 'src/app/services/course.service';
+import { NotifierService } from 'src/app/services/notifier.service';
 
 interface SessionCategory {
   value: string;
@@ -25,37 +27,66 @@ export class ViewSessionDialogComponent {
     { value: 'Physical', viewValue: 'Physical' },
   ];
 
+  public dailySession: any;
+  public course: any = [];
+
   constructor(
     public dialogRef: MatDialogRef<ViewSessionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private courseService: CourseService,
+    private notifier: NotifierService,
   ) { }
 
 
   ngOnInit(): void {
-    console.log("xxxxxxxxxxxx", this.data)
+    this.dailySession = this.data.dailySession
 
     this.initCourseSession();
+    this.getCourse()
   }
 
 
   initCourseSession() {
     this.courseSession = {
-      category: this.data.category,
-      day: this.data.day,
-      is_article_or_vedio: this.data.is_article_or_vedio,
-      tags: this.data.tags,
-      title: this.data.title,
-      description: this.data.description,
-      learning: this.data.learning,
-      preferences: this.data.preferences,
-      points_assigned: this.data.points_assigned,
-      imageUrl: this.data.imageUrl,
-      vedioUrl: this.data.vedioUrl,
-      articleUrl: this.data.articleUrl,
+      category: this.dailySession.category,
+      day: this.dailySession.day,
+      is_article_or_video: this.dailySession.is_article_or_video,
+      tags: this.dailySession.tags,
+      title: this.dailySession.title,
+      description: this.dailySession.description,
+      learning: this.dailySession.learning,
+      accessories: this.dailySession.accessories,
+      points_assigned: this.dailySession.points_assigned,
+      imageUrl: this.dailySession.imageUrl,
+      videoUrl: this.dailySession.videoUrl,
+      articleUrl: this.dailySession.articleUrl,
     }
   }
 
+  getCourse() {
+    this.courseService.getCourseById(this.data.course_id).subscribe((returned: any) => {
+      this.course = returned;
+    })
+  }
+
   updateDay(session: any) {
+
+    this.course.course_daily_sessions[this.data.sessionIndex] = session;
+
+    this.courseService.updateCourse(this.course).subscribe(returned => {
+      this.notifier.Notification("success", "Course Daily Session successfully updated");
+    })
+
+  }
+
+  deleteDay(session: any) {
+    // this.data.sessionIndex
+    this.course.course_daily_sessions.splice(this.data.sessionIndex, 1);
+
+    this.courseService.updateCourse(this.course).subscribe(returned => {
+      this.notifier.Notification("success", "Course Daily Session successfully deleted");
+      this.dialogRef.close();
+    })
 
   }
 

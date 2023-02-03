@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from 'src/app/layouts/admin-layout/admin-layout/admin-layout.component';
 import { CourseInfoComponent } from './courses/course-info/course-info.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
+import { FileUploadComponent } from './courses/file-upload/file-upload.component';
 import { NewCourseComponent } from './courses/new-course/new-course.component';
 import { EditPackComponent } from './packs/edit-pack/edit-pack.component';
 import { NewPackComponent } from './packs/new-pack/new-pack.component';
@@ -64,6 +65,12 @@ const AdminRoutes: Routes = [
             },
             {
                 path: 'points', component: CardInfoComponent
+            },
+
+
+
+            {
+                path: 'add-file', component: FileUploadComponent
             }
         ]
     }

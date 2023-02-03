@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CourseArticle } from 'src/app/models/course-article.model';
-import { CourseImage } from 'src/app/models/course-image.model';
-import { CourseVideo } from 'src/app/models/course-video.model';
 import { Course } from 'src/app/models/course.model';
-import { CourseArticleService } from 'src/app/services/course-article.service';
-import { CourseImageService } from 'src/app/services/course-image.service';
-import { CourseVideoService } from 'src/app/services/course-video.service';
 import { CourseService } from 'src/app/services/course.service';
 import { NotifierService } from 'src/app/services/notifier.service';
 import { ArticleVideoSelectDialogComponent } from '../article-video-select-dialog/article-video-select-dialog.component';

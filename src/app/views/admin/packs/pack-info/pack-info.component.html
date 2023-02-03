@@ -1,20 +1,20 @@
 <div class="container d-flex align-items-center">
 
-    <div class="no-course d-flex justify-content-center align-items-center" *ngIf="!available_packs">
+    <div class="no-pack d-flex justify-content-center align-items-center" *ngIf="!available_packs">
         <span>You have not added any packs yet.</span>
     </div>
 
-    <div class="outer-courses" *ngIf="available_packs">
-        <div class="course-holder d-flex" *ngFor="let pack of packs">
+    <div class="outer-packs" *ngIf="available_packs">
+        <div class="pack-holder d-flex" *ngFor="let pack of packs">
             <div class="image">
                 <img src="./../../../../../assets/images/packs/packs-image-1.png" width="43px" height="43px">
             </div>
             <div class="content">
-                <div class="course-title">
+                <div class="pack-title">
                     <span>{{pack.pack_title}}</span>
                 </div>
 
-                <div class="course-tutor">
+                <div class="pack-tutor">
                     <span>{{pack.pack_instructor}}</span>
                 </div>
             </div>

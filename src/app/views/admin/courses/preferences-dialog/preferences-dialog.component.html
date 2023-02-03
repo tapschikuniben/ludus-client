@@ -1,0 +1,57 @@
+<mat-dialog-content>
+    <div class="row">
+        <div class="col-md-12">
+            <mat-label class="header">{{data.message}}</mat-label>
+        </div>
+    </div>
+
+    <div class="section-devider"></div>
+
+    <div>
+        <div class="row col-lg-12 col-md-12" *ngIf="data.selecttype == 'field'">
+            <div *ngFor="let field of fields">
+                <mat-checkbox class="vacancy-checkbox body-text" [checked]="field.checked" (change)="checkVacancyCategory($event.checked , field.value)"> {{field.viewValue}}</mat-checkbox>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button mat-button class="confirm-button button-text" (click)="onConfirmField()">Confirm</button>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="data.selecttype == 'cone'">
+            <mat-label> &nbsp;&nbsp;&nbsp;Cones</mat-label>
+            <div class="col-lg-12 col-md-12">
+                <input class="form-control input-text" type="number" placeholder="Number of Cones" [(ngModel)]="coneNumber" name="cone">
+            </div>
+            <div class="d-flex justify-content-end col-lg-12 col-md-12">
+                <button mat-button class="save-btn button-text" (click)="onUpdateCone()">Update</button>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="data.selecttype == 'ball'">
+            <mat-label> &nbsp;&nbsp;&nbsp;Footballs</mat-label>
+            <div class="col-lg-12 col-md-12">
+                <input class="form-control input-text" type="number" placeholder="Number of Balls" [(ngModel)]="ballNumber" name="ball">
+            </div>
+            <div class="d-flex justify-content-end col-lg-12 col-md-12">
+                <button mat-button class="save-btn button-text" (click)="onUpdateBall()">Update</button>
+            </div>
+        </div>
+
+
+        <div class="row" *ngIf="data.selecttype == 'living room'">
+            <mat-label> &nbsp;&nbsp;&nbsp;Living Room</mat-label>
+            <div class="col-lg-12 col-md-12">
+                <mat-select class="form-control input-text" name="livingRoom" placeholder="Select Option" [(ngModel)]="isLivingRoom">
+                    <mat-option class="input-text" value="Yes">Yes</mat-option>
+                    <mat-option class="input-text" value="No">No</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="d-flex justify-content-end col-lg-12 col-md-12">
+                <button mat-button class="save-btn button-text" (click)="onLivingRoom()">Update</button>
+            </div>
+        </div>
+    </div>
+
+</mat-dialog-content>

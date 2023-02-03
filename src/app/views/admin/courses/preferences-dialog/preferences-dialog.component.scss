@@ -1,0 +1,50 @@
+.section-devider {
+    height: 3px;
+    background-color: #93C741;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.header {
+    color: #515A5A;
+}
+
+.form-control {
+    background-color: #d2eaaa !important;
+    border: none;
+    box-shadow: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+.save-btn {
+    color: #ffffff !important;
+    border-radius: 0;
+    padding: 8px 30px;
+    margin-right: 7px;
+    border: none;
+    outline: none;
+    background-color: #93C741;
+    cursor: pointer;
+}
+
+.confirm-button {
+    color: #ffffff !important;
+    border-radius: 0;
+    padding: 8px 30px;
+    margin-right: 7px;
+    border: none;
+    outline: none;
+    background-color: #93C741;
+    cursor: pointer;
+}
+
+.form-control {
+    margin-bottom: 20px;
+}
+
+mat-label {
+    font-family: 'Poppins-Medium';
+    font-size: 13px;
+    color: #93C741;
+}

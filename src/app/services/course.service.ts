@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Course } from '../models/course.model';
+import { Course, CourseDaySession } from '../models/course.model';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,7 +14,7 @@ const httpOptions = {
 export class CourseService {
 
     //server host api link
-    private baseurl = 'http://18.134.140.238:3000/api/';
+    private baseurl = 'http://localhost:3000/api/';
 
     constructor(private http: HttpClient) { }
 
@@ -36,6 +36,77 @@ export class CourseService {
 
     updateCourse(course: Course): Observable<Course> {
         return this.http.put<Course>(this.baseurl + 'courses' + '/' + course._id, course);
+    }
+
+    uploadDailyCourseSession(course: Course, file: File, videofile: File, articlefile: File) {
+
+        console.log("image", file)
+        console.log("video", videofile)
+        console.log("article", articlefile)
+        const formData: FormData = new FormData();
+
+        formData.append('courseimage', file);
+        formData.append('coursevideo', videofile);
+        formData.append('coursearticle', articlefile);
+
+        formData.append('course', JSON.stringify(course));
+
+
+        const req = new HttpRequest('PUT', this.baseurl + 'courses-daily-session' + '/' + course._id, formData, {
+            reportProgress: true,
+            responseType: 'json'
+        });
+
+        return this.http.request(req);
+
+    }
+
+    uploadCourseImage(course: Course, file: File) {
+
+        const formData: FormData = new FormData();
+
+        formData.append('courseimage', file);
+        formData.append('course', JSON.stringify(course));
+
+        const req = new HttpRequest('PUT', this.baseurl + 'courses-file-image' + '/' + course._id, formData, {
+            reportProgress: true,
+            responseType: 'json'
+        });
+
+        return this.http.request(req);
+
+    }
+
+    uploadCourseVideo(course: Course, file: File) {
+
+        const formData: FormData = new FormData();
+
+        formData.append('coursevideo', file);
+        formData.append('course', JSON.stringify(course));
+
+        const req = new HttpRequest('PUT', this.baseurl + 'courses-file-video' + '/' + course._id, formData, {
+            reportProgress: true,
+            responseType: 'json'
+        });
+
+        return this.http.request(req);
+
+    }
+
+    uploadCourseArticle(course: Course, file: File) {
+
+        const formData: FormData = new FormData();
+
+        formData.append('coursearticle', file);
+        formData.append('course', JSON.stringify(course));
+
+        const req = new HttpRequest('PUT', this.baseurl + 'courses-file-article' + '/' + course._id, formData, {
+            reportProgress: true,
+            responseType: 'json'
+        });
+
+        return this.http.request(req);
+
     }
 
 }

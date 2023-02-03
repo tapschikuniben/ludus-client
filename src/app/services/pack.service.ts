@@ -14,7 +14,7 @@ const httpOptions = {
 export class PackService {
 
     //server host api link
-    private baseurl = 'http://18.134.140.238:3000/api/';
+    private baseurl = 'http://localhost:3000/api/';
 
     constructor(private http: HttpClient) { }
 

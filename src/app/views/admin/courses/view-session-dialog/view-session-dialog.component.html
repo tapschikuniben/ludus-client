@@ -8,90 +8,111 @@
     <div class="section-devider"></div>
 </div>
 
-<div class="form-holder course-detail d-flex justify-content-center">
-    <form class="needs-validation" #f="ngForm">
-        <div class="row">
-            <mat-label> &nbsp;&nbsp;&nbsp;Select Category</mat-label>
-            <div class="col-md-9 col-lg-9">
-                <mat-select class="form-control input-text" [(ngModel)]="courseSession.category" name="sessionCategory">
-                    <mat-option class="input-text" value="" selected>Select Option</mat-option>
-                    <mat-option class="input-text" *ngFor="let sessionCategory of sessionCategories" [value]="sessionCategory.value">
-                        {{sessionCategory.viewValue}}
-                    </mat-option>
-                </mat-select>
-            </div>
-        </div>
-
-        <div class="row">
-            <mat-label> &nbsp;&nbsp;&nbsp;Tags</mat-label>
-            <div class="col-md-9 col-lg-9">
-                <input class="form-control input-text" placeholder="Tags" [(ngModel)]="courseSession.tags" name="tags">
-            </div>
-        </div>
-
-        <div class="row">
-            <mat-label> &nbsp;&nbsp;&nbsp;Title</mat-label>
-            <div class="col-md-9 col-lg-9">
-                <input class="form-control input-text" placeholder="Title" [(ngModel)]="courseSession.title" name="title">
-            </div>
-        </div>
-
-        <div class="row">
-            <mat-label> &nbsp;&nbsp;&nbsp;Quick Description</mat-label>
-            <div class="col-md-9 col-lg-9">
-                <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="courseSession.description" name="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
-            </div>
-        </div>
-
-        <div class="row">
-            <mat-label> &nbsp;&nbsp;&nbsp;What You Will Learn</mat-label>
-            <div class="col-md-9 col-lg-9">
-                <textarea class="form-control input-text" placeholder="What You Will Learn" [(ngModel)]="courseSession.learning" name="learning" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
-            </div>
-        </div>
-
-
-        <br />
-        <div class="row">
-            <div class="d-flex col-md-12">
-                <div>
-                    <button class="select-btn">Upload Video</button> &nbsp;&nbsp;&nbsp;
-                </div>
-                <div>
-                    <button class="select-btn">Select Article</button> &nbsp;&nbsp;&nbsp;
-                </div>
-                <div>
-                    <button class="select-btn">Upload Image</button> &nbsp;&nbsp;&nbsp;
+<div class="col-md-12 row">
+    <div class="form-holder course-detail d-flex justify-content-center col-lg-8 col-md-8">
+        <form class="needs-validation" #f="ngForm">
+            <div class="row">
+                <mat-label> &nbsp;&nbsp;&nbsp;Select Category</mat-label>
+                <div class="col-md-12 col-lg-12">
+                    <mat-select class="form-control input-text" [(ngModel)]="courseSession.category" name="sessionCategory">
+                        <mat-option class="input-text" value="" selected>Select Option</mat-option>
+                        <mat-option class="input-text" *ngFor="let sessionCategory of sessionCategories" [value]="sessionCategory.value">
+                            {{sessionCategory.viewValue}}
+                        </mat-option>
+                    </mat-select>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="d-flex">
-                    <button class="select-btn"><span class="pin"><img src="./../../../../../assets/images/courses/you-will-need.svg"></span> &nbsp; You Will Need</button> &nbsp;&nbsp;&nbsp;
+            <div class="row">
+                <mat-label> &nbsp;&nbsp;&nbsp;Tags</mat-label>
+                <div class="col-md-12 col-lg-12">
+                    <input class="form-control input-text" placeholder="Tags" [(ngModel)]="courseSession.tags" name="tags">
+                </div>
+            </div>
 
-                    <div class="options d-flex">
-                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/soccer-field.svg"></div>
-                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/cone.svg"></div>
-                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/football-ball.svg"></div>
-                        <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/living-room.svg"></div>
+            <div class="row">
+                <mat-label> &nbsp;&nbsp;&nbsp;Title</mat-label>
+                <div class="col-md-12 col-lg-12">
+                    <input class="form-control input-text" placeholder="Title" [(ngModel)]="courseSession.title" name="title">
+                </div>
+            </div>
+
+            <div class="row">
+                <mat-label> &nbsp;&nbsp;&nbsp;Quick Description</mat-label>
+                <div class="col-md-12 col-lg-12">
+                    <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="courseSession.description" name="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <mat-label> &nbsp;&nbsp;&nbsp;What You Will Learn</mat-label>
+                <div class="col-md-12 col-lg-12">
+                    <textarea class="form-control input-text" placeholder="What You Will Learn" [(ngModel)]="courseSession.learning" name="learning" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+                </div>
+            </div>
+
+
+            <br />
+            <div class="row">
+                <div class="d-flex col-md-12">
+                    <div>
+                        <button class="select-btn">Upload Video</button> &nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div>
+                        <button class="select-btn">Select Article</button> &nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div>
+                        <button class="select-btn">Upload Image</button> &nbsp;&nbsp;&nbsp;
                     </div>
                 </div>
             </div>
-        </div>
 
-        <br />
-        <div class="row">
-            <div class="col-md-2">
-                <mat-label> &nbsp;&nbsp;&nbsp;Points Assigned</mat-label>
-                <input class="form-control input-text" placeholder="Points Assigned" [(ngModel)]="courseSession.points_assigned" type="number" name="title" required>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex">
+                        <button class="select-btn"><span class="pin"><img src="./../../../../../assets/images/courses/you-will-need.svg"></span> &nbsp; You Will Need</button> &nbsp;&nbsp;&nbsp;
+
+                        <div class="options d-flex">
+                            <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/soccer-field.svg"></div>
+                            <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/cone.svg"></div>
+                            <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/football-ball.svg"></div>
+                            <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/living-room.svg"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-md-3">
-                <br />
-                <button class="select-btn" (click)="updateDay(courseSession)">Update Day</button>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <br />
+                    <button class="select-btn" (click)="updateDay(courseSession)">Update Day</button>&nbsp;&nbsp;&nbsp;
+                    <button class="select-btn-delete" (click)="deleteDay(courseSession)">Delete Day</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="media col-lg-4 col-md-4">
+        <div class="row" *ngIf="courseSession.videoUrl">
+            <div class="col-md-12 col-lg-12">
+                <video width="100%" controls>
+                  <source [src]="courseSession.videoUrl" type="video/mp4" height="400px">
+               </video>
             </div>
         </div>
-    </form>
+
+        <div class="row" *ngIf="courseSession.imageUrl">
+            <div class="col-md-12 col-lg-12">
+                <img [src]="courseSession.imageUrl" width="100%" height="400px">
+            </div>
+        </div>
+
+        <div class="row" *ngIf="courseSession.articleUrl">
+            <div class="article-link-holder col-md-12 col-lg-12">
+                <a class="article-link" [href]="courseSession.articleUrl" target="_blank">Article FIle</a>
+            </div>
+        </div>
+    </div>
 </div>

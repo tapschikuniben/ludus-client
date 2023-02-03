@@ -14,6 +14,12 @@
     color: #2A2A2E;
 }
 
+.outer-courses {
+    max-height: 60vh;
+    overflow: auto;
+    padding: 0 50px 0 0;
+}
+
 .course-holder {
     background-color: #d2eaaa;
     padding: 5px 20px;

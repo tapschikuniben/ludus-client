@@ -2,7 +2,13 @@
     height: 80vh;
 }
 
-.course-holder {
+.outer-packs {
+    max-height: 60vh;
+    overflow: auto;
+    padding: 0 50px 0 0;
+}
+
+.pack-holder {
     background-color: #d2eaaa;
     padding: 5px 20px;
     border-radius: 15px;
@@ -10,13 +16,13 @@
     margin-bottom: 15px;
 }
 
-.no-course {
+.no-pack {
     background-color: #d2eaaa;
     padding: 10px 20px;
     border-radius: 15px;
 }
 
-.no-course span {
+.no-pack span {
     font-family: 'Poppins-Medium';
     font-size: 14px;
     color: #2A2A2E;
@@ -27,13 +33,13 @@
     width: 290px;
 }
 
-.content .course-title {
+.content .pack-title {
     font-family: 'Poppins-Medium';
     font-size: 14px;
     color: #2A2A2E;
 }
 
-.content .course-tutor {
+.content .pack-tutor {
     font-family: 'Poppins-Medium';
     font-size: 14px;
     color: rgba(42, 42, 46, 0.4);

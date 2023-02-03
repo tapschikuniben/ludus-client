@@ -1,7 +1,8 @@
 <div class="container d-flex">
     <div class="form-holder course-detail col-lg-7">
         <form class="needs-validation" #f="ngForm">
-            <div class="row">
+            <div class="basic-details">
+                <!-- <div class="row">
                 <mat-label> &nbsp;&nbsp;&nbsp;Number of Days</mat-label>
                 <div class="col-md-9 col-lg-9">
                     <input class="form-control input-text" placeholder="Number of Days" [(ngModel)]="course.number_of_days" name="number_of_days">
@@ -27,7 +28,9 @@
                 <div class="col-md-9 col-lg-9">
                     <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="course.course_description" name="course_description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"></textarea>
                 </div>
+            </div> -->
             </div>
+
 
             <br />
 
@@ -35,7 +38,12 @@
                 <div class="col-md-12">
                     <button class="select-btn" (click)="selectDay()">Select Day</button> &nbsp;&nbsp;&nbsp;
                     <button class="select-btn" (click)="selectArticleOrVideo()">Article or Video?</button> &nbsp;&nbsp;&nbsp;
-                    <button class="select-btn">Upload Image</button> &nbsp;&nbsp;&nbsp;
+
+
+                    <input type="file" (change)="selectImage($event)" id="image-btn" hidden/>
+
+                    <!-- our custom upload button -->
+                    <label class="select-btn" for="image-btn">Upload Image</label> <span class="file-name-container input-text" *ngIf="imagename">{{imagename}}</span>
                 </div>
             </div>
             <br />
@@ -91,10 +99,20 @@
             <div class="row">
                 <div class="d-flex col-md-12">
                     <div *ngIf="selectedVideo || selectedArticleAndVideo">
-                        <button class="select-btn">Upload Video</button> &nbsp;&nbsp;&nbsp;
+                        <!-- <button class="select-btn">Upload Video</button> &nbsp;&nbsp;&nbsp; -->
+
+                        <input type="file" (change)="selectVideo($event)" id="video-btn" hidden/>
+
+                        <!-- our custom upload button -->
+                        <label class="select-btn" for="video-btn">Upload Video</label> <span class="file-name-container input-text" *ngIf="videoname">{{videoname}}</span> &nbsp;&nbsp;&nbsp;
                     </div>
                     <div *ngIf="selectedArticle || selectedArticleAndVideo">
-                        <button class="select-btn">Select Article</button> &nbsp;&nbsp;&nbsp;
+                        <!-- <button class="select-btn">Select Article</button> &nbsp;&nbsp;&nbsp; -->
+
+                        <input type="file" (change)="selectArticle($event)" id="article-btn" hidden/>
+
+                        <!-- our custom upload button -->
+                        <label class="select-btn" for="article-btn">Select Article</label> <span class="file-name-container input-text" *ngIf="articlename">{{articlename}}</span>&nbsp;&nbsp;&nbsp;
                     </div>
                 </div>
             </div>
@@ -105,10 +123,30 @@
                         <button class="select-btn"><span class="pin"><img src="./../../../../../assets/images/courses/you-will-need.svg"></span> &nbsp; You Will Need</button> &nbsp;&nbsp;&nbsp;
 
                         <div class="options d-flex">
-                            <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/soccer-field.svg"></div>
-                            <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/cone.svg"></div>
-                            <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/football-ball.svg"></div>
-                            <div class="option d-flex align-items-center"><img src="./../../../../../assets/images/courses/living-room.svg"></div>
+                            <div class="option d-flex align-items-center" (click)="selectPreference('field')">
+                                <div class="holder">
+                                    <img src="./../../../../../assets/images/courses/soccer-field.svg">
+                                    <div class="holder-text text-center" *ngFor="let field of this.courseSession.accessories.field"><span>{{field.field_name}}</span></div>
+                                </div>
+                            </div>
+                            <div class="option d-flex align-items-center" (click)="selectPreference('cone')">
+                                <div class="holder">
+                                    <img src="./../../../../../assets/images/courses/cone.svg">
+                                    <div class="holder-text text-center"><span>{{courseSession.accessories.coneNumber}}</span></div>
+                                </div>
+                            </div>
+                            <div class="option d-flex align-items-center" (click)="selectPreference('ball')">
+                                <div class="holder">
+                                    <img src="./../../../../../assets/images/courses/football-ball.svg">
+                                    <div class="holder-text text-center"><span>{{courseSession.accessories.ballNumber}}</span></div>
+                                </div>
+                            </div>
+                            <div class="option d-flex align-items-center" (click)="selectPreference('living room')">
+                                <div class="holder">
+                                    <img src="./../../../../../assets/images/courses/living-room.svg">
+                                    <div class="holder-text text-center"><span>{{courseSession.accessories.isLivingRoom}}</span></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -117,8 +155,9 @@
             <br />
             <div class="row">
                 <div class="col-md-5">
-                    <br />
-                    <button class="select-btn" (click)="saveDay(courseSession)">Save Day</button>
+                    <button class="select-btn" (click)="saveFiles(courseSession)">Save Day</button>
+                    <br /> <br /> <br />
+                    <button class="select-btn" (click)="saveDay(courseSession)">Save Day (og)</button>
                 </div>
             </div>
 
@@ -127,7 +166,7 @@
             <br />
             <div class="row">
                 <div class="col-md-12">
-                    <button class="add-btn" (click)="updateCourse(course)">Update Course</button> &nbsp;&nbsp;&nbsp;
+                    <!-- <button class="add-btn" (click)="updateCourse(course)">Update Course</button> &nbsp;&nbsp;&nbsp; -->
 
                     <button class="delete-btn" (click)="confirmDialogProfile(course)">Delete Course</button>
                 </div>
@@ -148,11 +187,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let courseSession of courseSessions">
+                    <tr *ngFor="let courseSession of courseSessions, index as i">
                         <td>{{courseSession.day}}</td>
                         <td>{{courseSession.title}}</td>
                         <td>
-                            <mat-icon (click)="viewSession(courseSession)">visibility</mat-icon>
+                            <mat-icon (click)="viewSession(courseSession, i)">visibility</mat-icon>
                         </td>
                     </tr>
                 </tbody>

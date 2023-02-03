@@ -4,6 +4,20 @@
 
 form {
     width: 100%;
+    margin-bottom: 50px;
+}
+
+.form-holder {
+    max-height: calc(100vh - 100px);
+    overflow: auto;
+}
+
+form .row {
+    width: 100%;
+}
+
+::-webkit-scrollbar:vertical {
+    display: none !important;
 }
 
 .table-holder {
@@ -42,6 +56,7 @@ form {
     font-family: 'Mulish-Regular';
     font-size: 16px;
     line-height: 30px;
+    cursor: pointer;
 }
 
 .add-btn {
@@ -72,6 +87,7 @@ form {
 
 .options>div {
     margin-right: 50px;
+    cursor: pointer;
 }
 
 .pin img {
@@ -118,4 +134,20 @@ tbody tr td {
 .header h2 {
     font-family: 'Poppins-SemiBold';
     font-size: 15px;
+}
+
+.file-name-container {
+    border: solid 1px #93C741;
+    padding: 8px;
+    margin-left: 5px;
+}
+
+.holder span {
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+    color: #93C741;
+}
+
+.holder .holder-text {
+    margin-top: 10px;
 }

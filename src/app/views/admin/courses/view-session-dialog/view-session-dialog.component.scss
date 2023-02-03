@@ -29,6 +29,17 @@ form {
     line-height: 30px;
 }
 
+.select-btn-delete {
+    background-color: #FF0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 30px;
+    font-family: 'Mulish-Regular';
+    font-size: 16px;
+    line-height: 30px;
+}
+
 .add-btn {
     background-color: #93C741;
     color: #ffffff;
@@ -97,4 +108,22 @@ mat-label {
     background-color: #93C741;
     margin-bottom: 20px;
     width: 95%;
+}
+
+.media {
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 5px 32px 39px 21px rgba(0, 0, 0, 0.05);
+}
+
+.article-link {
+    font-family: 'Poppins-Medium';
+    font-size: 13px;
+    color: #93C741;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.article-link-holder {
+    margin-top: 25px;
 }

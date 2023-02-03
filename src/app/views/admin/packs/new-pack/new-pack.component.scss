@@ -6,6 +6,10 @@ form {
     width: 100%;
 }
 
+.container {
+    height: calc(100vh - 100px);
+}
+
 .container .row {
     margin-top: 20px;
 }

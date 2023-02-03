@@ -49,6 +49,8 @@ import { SelectDayDialogComponent } from './courses/select-day-dialog/select-day
 import { ViewSessionDialogComponent } from './courses/view-session-dialog/view-session-dialog.component';
 import { NotifierService } from 'src/app/services/notifier.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FileUploadComponent } from './courses/file-upload/file-upload.component';
+import { PreferencesDialogComponent } from './courses/preferences-dialog/preferences-dialog.component';
 
 
 
@@ -69,7 +71,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CardInfoComponent,
     AdminLoginComponent,
     SelectDayDialogComponent,
-    ViewSessionDialogComponent
+    ViewSessionDialogComponent,
+    FileUploadComponent,
+    PreferencesDialogComponent
   ],
   imports: [
     CommonModule,

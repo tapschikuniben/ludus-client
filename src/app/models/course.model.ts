@@ -1,16 +1,16 @@
 
 export interface CourseDaySession {
     category: string;
-    day: string;
-    is_article_or_vedio: string;
+    day: number;
+    is_article_or_video: string;
     tags: string;
     title: string;
     description: string;
     learning: string;
-    preferences: [] | any;
+    accessories: [] | any;
     points_assigned: number | null;
     imageUrl: string;
-    vedioUrl: string;
+    videoUrl: string;
     articleUrl: string;
 }
 
