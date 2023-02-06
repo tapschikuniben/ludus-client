@@ -1,5 +1,6 @@
 .container {
     max-width: 100%;
+    max-height: calc(100vh - 100px);
 }
 
 form {
@@ -21,10 +22,11 @@ form .row {
 }
 
 .table-holder {
-    margin-top: 20px;
     border-radius: 20px;
     padding: 20px;
     box-shadow: 5px 32px 39px 21px rgba(0, 0, 0, 0.05);
+    max-height: calc(100vh - 100px);
+    overflow: auto;
 }
 
 .table-holder table {
@@ -57,6 +59,10 @@ form .row {
     font-size: 16px;
     line-height: 30px;
     cursor: pointer;
+}
+
+.select-btn:disabled {
+    background-color: #dce0da;
 }
 
 .add-btn {
@@ -119,7 +125,6 @@ tbody tr {
 }
 
 tbody tr td mat-icon {
-    color: #93C741;
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -127,8 +132,25 @@ tbody tr td mat-icon {
     cursor: pointer;
 }
 
+tbody tr td mat-icon.delete-icon {
+    color: #FF0000;
+}
+
+tbody tr td mat-icon.show-icon {
+    color: #93C741;
+}
+
 tbody tr td {
     vertical-align: middle;
+}
+
+td,
+th {
+    width: 40%;
+}
+
+.actions {
+    width: 100%;
 }
 
 .header h2 {
@@ -150,4 +172,22 @@ tbody tr td {
 
 .holder .holder-text {
     margin-top: 10px;
+}
+
+:host ::ng-deep .custom-spinner circle {
+    stroke: #93C741;
+}
+
+.spinner-holder {
+    height: 50vh;
+}
+
+.err-holder {
+    margin-top: 10px;
+}
+
+.err {
+    color: #FF0000;
+    font-family: 'Poppins-Regular';
+    font-size: 12px;
 }

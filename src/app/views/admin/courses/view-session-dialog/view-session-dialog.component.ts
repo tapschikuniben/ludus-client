@@ -35,37 +35,38 @@ export class ViewSessionDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private courseService: CourseService,
     private notifier: NotifierService,
-  ) { }
+  ) {
+  }
 
 
   ngOnInit(): void {
-    this.dailySession = this.data.dailySession
-
     this.initCourseSession();
     this.getCourse()
   }
 
-
   initCourseSession() {
     this.courseSession = {
-      category: this.dailySession.category,
-      day: this.dailySession.day,
-      is_article_or_video: this.dailySession.is_article_or_video,
-      tags: this.dailySession.tags,
-      title: this.dailySession.title,
-      description: this.dailySession.description,
-      learning: this.dailySession.learning,
-      accessories: this.dailySession.accessories,
-      points_assigned: this.dailySession.points_assigned,
-      imageUrl: this.dailySession.imageUrl,
-      videoUrl: this.dailySession.videoUrl,
-      articleUrl: this.dailySession.articleUrl,
+      category: '',
+      day: 1,
+      is_article_or_video: '',
+      tags: '',
+      title: '',
+      description: '',
+      learning: '',
+      accessories: [],
+      points_assigned: 0,
+      imageUrl: '',
+      videoUrl: '',
+      articleUrl: '',
     }
   }
 
   getCourse() {
     this.courseService.getCourseById(this.data.course_id).subscribe((returned: any) => {
       this.course = returned;
+
+      this.courseSession = this.course.course_daily_sessions[this.data.sessionIndex]
+
     })
   }
 

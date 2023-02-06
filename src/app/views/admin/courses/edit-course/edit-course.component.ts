@@ -25,7 +25,6 @@ export class EditCourseComponent {
 
   public course!: Course;
   public courseSession!: CourseDaySession;
-  public selectedDay: number | any = 0;
 
   public selectedArticle = false;
   public selectedVideo = false;
@@ -41,8 +40,6 @@ export class EditCourseComponent {
 
   public courseSessions: any;
 
-
-
   selectedImageFiles?: FileList | any;
   selectedVideoFiles?: FileList | any;
   selectedArticleFiles?: FileList | any;
@@ -57,6 +54,12 @@ export class EditCourseComponent {
   public videoname: any;
   public articlename: any;
   public sendData = {};
+
+  public selectedDayErr = '';
+  public imageProcessComplete: boolean = false;
+  public videoProcessComplete: boolean = false;
+  public articleProcessComplete: boolean = false;
+  public loading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -88,7 +91,7 @@ export class EditCourseComponent {
   initCourseSession() {
     this.courseSession = {
       category: "",
-      day: 1,
+      day: 0,
       is_article_or_video: "",
       tags: "",
       title: "",
@@ -107,7 +110,6 @@ export class EditCourseComponent {
 
     this.courseService.getCourseById(courseId).subscribe(returned => {
       this.course = returned;
-      this.courseSessions = this.course.course_daily_sessions;
     })
   }
 
@@ -146,7 +148,22 @@ export class EditCourseComponent {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.selectedDay = result.selected_day;
+
+        const day = this.course.course_daily_sessions.find(element => {
+          if (element.day === result.selected_day) {
+            return true;
+          }
+          return false;
+        });
+
+        if (day) {
+          this.selectedDayErr = 'Select a day that has not been selected';
+          this.courseSession.day = 0;
+        } else {
+          this.courseSession.day = result.selected_day;
+          this.selectedDayErr = '';
+        }
+
       }
 
     });
@@ -204,303 +221,151 @@ export class EditCourseComponent {
     });
   }
 
+
   saveDay(daySession: any) {
 
-    this.courseSession.day = this.selectedDay;
-    this.course.course_daily_sessions.push(daySession);
+    this.loading = true;
 
-    this.imageprogress = 0;
-
-    if (this.selectedImageFiles) {
-      const file: File | null = this.selectedImageFiles.item(0);
-
-      if (file) {
-        this.currentFile = file;
-
-        this.courseService.uploadDailyCourseSession(this.course, this.currentFile, this.currentVideoFile, this.currentArticleFile).subscribe({
-          next: (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.imageprogress = Math.round((100 * event.loaded) / event.total);
-
-              if (this.imageprogress == 100) {
-
-                this.notifier.Notification("success", "Course Daily Session successfully added");
-              }
-            } else if (event instanceof HttpResponse) {
-              this.message = event.body.message;
-              // this.fileInfos = this.uploadService.getFiles();
-            }
-          },
-          error: (err: any) => {
-            console.log(err);
-            this.imageprogress = 0;
-
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-              this.notifier.Notification("warning", "Could not save daily session!");
-            } else {
-              this.message = 'Could not upload the file!';
-              this.notifier.Notification("warning", "Could not save daily session!");
-            }
-
-            this.currentFile = undefined;
-          },
-        });
-      }
-
-      this.selectedImageFiles = undefined;
-    }
-
-    if (this.selectedVideoFiles) {
-      const videofile: File | null = this.selectedVideoFiles.item(0);
-
-      if (videofile) {
-        this.currentVideoFile = videofile;
-
-        this.courseService.uploadDailyCourseSession(this.course, this.currentFile, this.currentVideoFile, this.currentArticleFile).subscribe({
-          next: (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.imageprogress = Math.round((100 * event.loaded) / event.total);
-
-              if (this.imageprogress == 100) {
-
-                this.notifier.Notification("success", "Course Daily Session successfully added");
-              }
-            } else if (event instanceof HttpResponse) {
-              this.message = event.body.message;
-              // this.fileInfos = this.uploadService.getFiles();
-            }
-          },
-          error: (err: any) => {
-            console.log(err);
-            this.imageprogress = 0;
-
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-              this.notifier.Notification("warning", "Could not save daily session!");
-            } else {
-              this.message = 'Could not upload the file!';
-              this.notifier.Notification("warning", "Could not save daily session!");
-            }
-
-            this.currentVideoFile = undefined;
-          },
-        });
-      }
-
-
-      this.selectedVideoFiles = undefined;
+    if (this.courseSession.day == 0) {
+      this.imageProcessComplete = true;
+      this.videoProcessComplete = true;
+      this.articleProcessComplete = true;
+      this.selectedDayErr = "Select day for your course";
     }
 
 
-    if (this.selectedArticleFiles) {
+    if (this.courseSession.day > 0) {
 
-      const articlefile: File | null = this.selectedArticleFiles.item(0);
+      this.course.course_daily_sessions.push(daySession);
 
-      if (articlefile) {
-        this.currentArticleFile = articlefile;
+      this.courseService.updateCourse(this.course).subscribe(() => {
 
-        this.courseService.uploadDailyCourseSession(this.course, this.currentFile, this.currentVideoFile, this.currentArticleFile).subscribe({
-          next: (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.imageprogress = Math.round((100 * event.loaded) / event.total);
+        this.uploadImage().then(returned => {
+          if (returned) {
+            this.imageProcessComplete = true;
+          }
 
-              if (this.imageprogress == 100) {
+          if (this.imageProcessComplete && this.videoProcessComplete && this.articleProcessComplete) {
+            this.loading = false;
+            this.notifier.Notification("success", "Session added successfully");
+            this.getCourse();
+            this.clearForm();
+          }
 
-                this.notifier.Notification("success", "Course Daily Session successfully added");
-              }
-            } else if (event instanceof HttpResponse) {
-              this.message = event.body.message;
-              // this.fileInfos = this.uploadService.getFiles();
-            }
-          },
-          error: (err: any) => {
-            console.log(err);
-            this.imageprogress = 0;
+        }),
 
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-              this.notifier.Notification("warning", "Could not save daily session!");
-            } else {
-              this.message = 'Could not upload the file!';
-              this.notifier.Notification("warning", "Could not save daily session!");
+          this.uploadVideo().then(returned => {
+            if (returned) {
+              this.videoProcessComplete = true;
             }
 
-            this.currentArticleFile = undefined;
-          },
-        });
-      }
+            if (this.imageProcessComplete && this.videoProcessComplete && this.articleProcessComplete) {
+              this.loading = false;
+              this.notifier.Notification("success", "Session added successfully");
+              this.getCourse();
+              this.clearForm();
+            }
+          }),
 
-      this.selectedArticleFiles = undefined;
+          this.uploadArticle().then(returned => {
+            if (returned) {
+              this.articleProcessComplete = true;
+            }
+
+            if (this.imageProcessComplete && this.videoProcessComplete && this.articleProcessComplete) {
+              this.loading = false;
+              this.notifier.Notification("success", "Session added successfully");
+              this.getCourse();
+              this.clearForm();
+            }
+          })
+      })
+    } else {
+      this.notifier.Notification("warning", "Failed to update");
     }
 
 
   }
 
-
-  saveFiles(daySession: any) {
-
-    this.courseSession.day = this.selectedDay;
-    this.course.course_daily_sessions.push(daySession);
-
-
-    this.saveImageFile();
-    this.saveVideoFile();
-    this.saveArticleFile();
-
-
-  }
-
-  saveImageFile() {
-    this.courseService.updateCourse(this.course).subscribe(returned => {
-      this.uploadImage();
-    })
-
-  }
-
-  saveVideoFile() {
-    this.courseService.updateCourse(this.course).subscribe(returned => {
-      this.uploadVideo();
-    })
-  }
-
-  saveArticleFile() {
-    this.courseService.updateCourse(this.course).subscribe(returned => {
-      this.uploadArticle();
-    })
-  }
 
   uploadImage() {
+    var promise = new Promise((resolve, reject) => {
 
-    if (this.selectedImageFiles) {
-      const file: File | null = this.selectedImageFiles.item(0);
+      if (this.selectedImageFiles) {
+        const file: File | null = this.selectedImageFiles.item(0);
 
-      if (file) {
-        this.currentFile = file;
-        this.courseService.uploadCourseImage(this.course, this.currentFile).subscribe(
-          {
-            next: (event: any) => {
-              if (event.type === HttpEventType.UploadProgress) {
-                this.imageprogress = Math.round((100 * event.loaded) / event.total);
+        if (file) {
+          this.currentFile = file;
+          this.courseService.uploadCourseImage(this.course, this.currentFile).subscribe((event: any) => {
 
-                if (this.imageprogress == 100) {
+            if (event.body) {
+              console.log(event.body);
+              resolve(event.body)
+            }
 
-                  this.notifier.Notification("success", "Course Daily Session successfully added");
-                }
-              } else if (event instanceof HttpResponse) {
-                this.message = event.body.message;
-                // this.fileInfos = this.uploadService.getFiles();
-              }
-            },
-            error: (err: any) => {
-              console.log(err);
-              this.imageprogress = 0;
-
-              if (err.error && err.error.message) {
-                this.message = err.error.message;
-                this.notifier.Notification("warning", "Could not save daily session!");
-              } else {
-                this.message = 'Could not upload the file!';
-                this.notifier.Notification("warning", "Could not save daily session!");
-              }
-
-              this.currentFile = undefined;
-            },
-          }
-        )
+          })
+        }
+        this.selectedImageFiles = undefined;
+      } else {
+        resolve("empty")
       }
-      this.selectedImageFiles = undefined;
-    }
+    });
+    return promise;
 
   }
 
 
   uploadVideo() {
 
-    if (this.selectedVideoFiles) {
-      const videofile: File | null = this.selectedVideoFiles.item(0);
+    var promise = new Promise((resolve, reject) => {
+      if (this.selectedVideoFiles) {
+        const videofile: File | null = this.selectedVideoFiles.item(0);
 
-      if (videofile) {
-        this.currentVideoFile = videofile;
-        this.courseService.uploadCourseVideo(this.course, this.currentVideoFile).subscribe(
-          {
-            next: (event: any) => {
-              if (event.type === HttpEventType.UploadProgress) {
-                this.videoprogress = Math.round((100 * event.loaded) / event.total);
-
-                if (this.videoprogress == 100) {
-
-                  this.notifier.Notification("success", "Course Daily Session successfully added");
-                }
-              } else if (event instanceof HttpResponse) {
-                this.message = event.body.message;
-                // this.fileInfos = this.uploadService.getFiles();
-              }
-            },
-            error: (err: any) => {
-              console.log(err);
-              this.videoprogress = 0;
-
-              if (err.error && err.error.message) {
-                this.message = err.error.message;
-                this.notifier.Notification("warning", "Could not save daily session!");
-              } else {
-                this.message = 'Could not upload the file!';
-                this.notifier.Notification("warning", "Could not save daily session!");
-              }
-
-              this.currentVideoFile = undefined;
-            },
+        if (videofile) {
+          this.currentVideoFile = videofile;
+          this.courseService.uploadCourseVideo(this.course, this.currentVideoFile).subscribe((event: any) => {
+            if (event.body) {
+              console.log(event.body);
+              resolve(event.body)
+            }
           }
-        )
+
+          )
+        }
+        this.selectedVideoFiles = undefined;
+      } else {
+        resolve("empty")
       }
-      this.selectedVideoFiles = undefined;
-    }
+    });
+    return promise;
 
   }
 
 
   uploadArticle() {
 
-    if (this.selectedArticleFiles) {
-      const articlefile: File | null = this.selectedArticleFiles.item(0);
+    var promise = new Promise((resolve, reject) => {
+      if (this.selectedArticleFiles) {
+        const articlefile: File | null = this.selectedArticleFiles.item(0);
 
-      if (articlefile) {
-        this.currentArticleFile = articlefile;
-        this.courseService.uploadCourseArticle(this.course, this.currentArticleFile).subscribe(
-          {
-            next: (event: any) => {
-              if (event.type === HttpEventType.UploadProgress) {
-                this.articleprogress = Math.round((100 * event.loaded) / event.total);
+        if (articlefile) {
+          this.currentArticleFile = articlefile;
+          this.courseService.uploadCourseArticle(this.course, this.currentArticleFile).subscribe((event: any) => {
 
-                if (this.articleprogress == 100) {
-
-                  this.notifier.Notification("success", "Course Daily Session successfully added");
-                }
-              } else if (event instanceof HttpResponse) {
-                this.message = event.body.message;
-                // this.fileInfos = this.uploadService.getFiles();
-              }
-            },
-            error: (err: any) => {
-              console.log(err);
-              this.articleprogress = 0;
-
-              if (err.error && err.error.message) {
-                this.message = err.error.message;
-                this.notifier.Notification("warning", "Could not save daily session!");
-              } else {
-                this.message = 'Could not upload the file!';
-                this.notifier.Notification("warning", "Could not save daily session!");
-              }
-
-              this.currentArticleFile = undefined;
-            },
+            if (event.body) {
+              console.log(event.body);
+              resolve(event.body)
+            }
           }
-        )
+
+          )
+        }
+        this.selectedArticleFiles = undefined;
+      } else {
+        resolve("empty")
       }
-      this.selectedArticleFiles = undefined;
-    }
+    });
+    return promise;
 
   }
 
@@ -598,5 +463,31 @@ export class EditCourseComponent {
       }
 
     })
+  }
+
+  deleteDay(index: any) {
+    // this.data.sessionIndex
+    this.course.course_daily_sessions.splice(index, 1);
+
+    this.courseService.updateCourse(this.course).subscribe(returned => {
+      this.notifier.Notification("success", "Course Daily Session successfully deleted");
+    })
+
+  }
+
+
+  clearForm() {
+    this.courseSession.day = 0;
+    this.initCourseSession();
+
+    this.selectedImageFiles = undefined;
+    this.selectedArticleFiles = undefined;
+    this.selectedVideoFiles = undefined;
+
+    this.imagename = '';
+    this.articlename = '';
+    this.videoname = '';
+
+    console.log(this.courseSession)
   }
 }

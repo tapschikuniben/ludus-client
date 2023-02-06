@@ -31,8 +31,7 @@
             </div> -->
             </div>
 
-
-            <br />
+            <!-- <button class="select-btn" (click)="clearForm()">Clear</button> &nbsp;&nbsp;&nbsp; -->
 
             <div class="row">
                 <div class="col-md-12">
@@ -46,18 +45,21 @@
                     <label class="select-btn" for="image-btn">Upload Image</label> <span class="file-name-container input-text" *ngIf="imagename">{{imagename}}</span>
                 </div>
             </div>
+
+            <div *ngIf="selectedDayErr" class="err-holder"> <span class="err"> {{selectedDayErr}}</span></div>
+
             <br />
 
-            <div class="row" *ngIf="selectedDay > 0">
+            <div class="row" *ngIf="courseSession.day > 0">
                 <div class="day-number col-md-12">
-                    <span>Course Lesson for Day {{selectedDay}}</span>
+                    <span>Course Lesson for Day {{courseSession.day}}</span>
                 </div>
             </div>
 
             <div class="row">
                 <mat-label> &nbsp;&nbsp;&nbsp;Select Category</mat-label>
                 <div class="col-md-9 col-lg-9">
-                    <mat-select class="form-control input-text" [(ngModel)]="courseSession.category" name="sessionCategory">
+                    <mat-select class="form-control input-text" [(ngModel)]="courseSession.category" name="sessionCategory" required>
                         <mat-option class="input-text" value="" selected>Select Option</mat-option>
                         <mat-option class="input-text" *ngFor="let sessionCategory of sessionCategories" [value]="sessionCategory.value">
                             {{sessionCategory.viewValue}}
@@ -76,21 +78,21 @@
             <div class="row">
                 <mat-label> &nbsp;&nbsp;&nbsp;Title</mat-label>
                 <div class="col-md-9 col-lg-9">
-                    <input class="form-control input-text" placeholder="Title" [(ngModel)]="courseSession.title" name="title">
+                    <input class="form-control input-text" placeholder="Title" [(ngModel)]="courseSession.title" name="title" required>
                 </div>
             </div>
 
             <div class="row">
                 <mat-label> &nbsp;&nbsp;&nbsp;Quick Description</mat-label>
                 <div class="col-md-9 col-lg-9">
-                    <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="courseSession.description" name="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+                    <textarea class="form-control input-text" placeholder="Quick Description" [(ngModel)]="courseSession.description" name="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" required></textarea>
                 </div>
             </div>
 
             <div class="row">
                 <mat-label> &nbsp;&nbsp;&nbsp;What You Will Learn</mat-label>
                 <div class="col-md-9 col-lg-9">
-                    <textarea class="form-control input-text" placeholder="What You Will Learn" [(ngModel)]="courseSession.learning" name="learning" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+                    <textarea class="form-control input-text" placeholder="What You Will Learn" [(ngModel)]="courseSession.learning" name="learning" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" required></textarea>
                 </div>
             </div>
 
@@ -155,13 +157,10 @@
             <br />
             <div class="row">
                 <div class="col-md-5">
-                    <button class="select-btn" (click)="saveFiles(courseSession)">Save Day</button>
-                    <br /> <br /> <br />
-                    <button class="select-btn" (click)="saveDay(courseSession)">Save Day (og)</button>
+                    <button class="select-btn" (click)="saveDay(courseSession)" [disabled]="!f.valid">Save Day</button>
                 </div>
             </div>
 
-            <br />
             <br />
             <br />
             <div class="row">
@@ -174,11 +173,19 @@
         </form>
     </div>
 
+    <!-- <div class="container-right col-lg-5 d-flex justify-content-center align-items-center">
+        <mat-spinner class="custom-spinner" diameter="30"></mat-spinner>
+    </div> -->
 
-    <div class="col-lg-5">
+    <div class="container-right col-lg-5">
         <div class="table-holder">
             <span class="header"><h2>Daily Sessions</h2></span>
-            <table class="table">
+
+            <div class="spinner-holder d-flex justify-content-center align-items-center" *ngIf="loading">
+                <mat-spinner class="custom-spinner align-self-center" diameter="30"></mat-spinner>
+            </div>
+
+            <table class="table" *ngIf="!loading">
                 <thead>
                     <tr>
                         <th>Day</th>
@@ -187,11 +194,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let courseSession of courseSessions, index as i">
+                    <tr *ngFor="let courseSession of course.course_daily_sessions, index as i">
                         <td>{{courseSession.day}}</td>
                         <td>{{courseSession.title}}</td>
-                        <td>
-                            <mat-icon (click)="viewSession(courseSession, i)">visibility</mat-icon>
+                        <td class="actions d-flex justify-content-center">
+                            <mat-icon class="show-icon" (click)="viewSession(courseSession, i)">visibility</mat-icon> &nbsp;
+                            <mat-icon class="delete-icon" (click)="deleteDay(i)">delete</mat-icon>
                         </td>
                     </tr>
                 </tbody>

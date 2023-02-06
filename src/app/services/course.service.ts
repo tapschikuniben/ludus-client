@@ -38,29 +38,6 @@ export class CourseService {
         return this.http.put<Course>(this.baseurl + 'courses' + '/' + course._id, course);
     }
 
-    uploadDailyCourseSession(course: Course, file: File, videofile: File, articlefile: File) {
-
-        console.log("image", file)
-        console.log("video", videofile)
-        console.log("article", articlefile)
-        const formData: FormData = new FormData();
-
-        formData.append('courseimage', file);
-        formData.append('coursevideo', videofile);
-        formData.append('coursearticle', articlefile);
-
-        formData.append('course', JSON.stringify(course));
-
-
-        const req = new HttpRequest('PUT', this.baseurl + 'courses-daily-session' + '/' + course._id, formData, {
-            reportProgress: true,
-            responseType: 'json'
-        });
-
-        return this.http.request(req);
-
-    }
-
     uploadCourseImage(course: Course, file: File) {
 
         const formData: FormData = new FormData();

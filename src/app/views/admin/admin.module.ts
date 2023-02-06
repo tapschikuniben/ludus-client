@@ -73,7 +73,7 @@ import { PreferencesDialogComponent } from './courses/preferences-dialog/prefere
     SelectDayDialogComponent,
     ViewSessionDialogComponent,
     FileUploadComponent,
-    PreferencesDialogComponent
+    PreferencesDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -109,7 +109,7 @@ import { PreferencesDialogComponent } from './courses/preferences-dialog/prefere
     MatProgressSpinnerModule,
     RouterModule,
     MaterialFileInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   providers: [NotifierService],
