@@ -38,12 +38,13 @@ export class CourseService {
         return this.http.put<Course>(this.baseurl + 'courses' + '/' + course._id, course);
     }
 
-    uploadCourseImage(course: Course, file: File) {
+    uploadCourseImage(course: Course, file: File, fileData: any) {
 
         const formData: FormData = new FormData();
 
         formData.append('courseimage', file);
         formData.append('course', JSON.stringify(course));
+        formData.append('file_data', JSON.stringify(fileData));
 
         const req = new HttpRequest('PUT', this.baseurl + 'courses-file-image' + '/' + course._id, formData, {
             reportProgress: true,
@@ -54,12 +55,13 @@ export class CourseService {
 
     }
 
-    uploadCourseVideo(course: Course, file: File) {
+    uploadCourseVideo(course: Course, file: File, fileData: any) {
 
         const formData: FormData = new FormData();
 
         formData.append('coursevideo', file);
         formData.append('course', JSON.stringify(course));
+        formData.append('file_data', JSON.stringify(fileData));
 
         const req = new HttpRequest('PUT', this.baseurl + 'courses-file-video' + '/' + course._id, formData, {
             reportProgress: true,
@@ -70,12 +72,13 @@ export class CourseService {
 
     }
 
-    uploadCourseArticle(course: Course, file: File) {
+    uploadCourseArticle(course: Course, file: File, fileData: any) {
 
         const formData: FormData = new FormData();
 
         formData.append('coursearticle', file);
         formData.append('course', JSON.stringify(course));
+        formData.append('file_data', JSON.stringify(fileData));
 
         const req = new HttpRequest('PUT', this.baseurl + 'courses-file-article' + '/' + course._id, formData, {
             reportProgress: true,

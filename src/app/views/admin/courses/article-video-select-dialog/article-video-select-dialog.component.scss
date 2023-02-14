@@ -16,6 +16,8 @@ button {
 
 .header {
     color: #515A5A;
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
 }
 
 mat-label {
@@ -35,9 +37,4 @@ mat-label {
 .select-both-btn {
     background-color: #1c1c1c;
     color: #ffffff !important;
-}
-
-.header {
-    font-family: 'Poppins-Medium';
-    font-size: 14px;
 }

@@ -36,19 +36,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <button class="select-btn" (click)="selectDay()">Select Day</button> &nbsp;&nbsp;&nbsp;
-                    <button class="select-btn" (click)="selectArticleOrVideo()">Article or Video?</button> &nbsp;&nbsp;&nbsp;
-
-
-                    <input type="file" (change)="selectImage($event)" id="image-btn" hidden/>
-
-                    <!-- our custom upload button -->
-                    <label class="select-btn" for="image-btn">Upload Image</label> <span class="file-name-container input-text" *ngIf="imagename">{{imagename}}</span>
                 </div>
             </div>
 
             <div *ngIf="selectedDayErr" class="err-holder"> <span class="err"> {{selectedDayErr}}</span></div>
-
-            <br />
 
             <div class="row" *ngIf="courseSession.day > 0">
                 <div class="day-number col-md-12">
@@ -99,27 +90,99 @@
 
             <br />
             <div class="row">
-                <div class="d-flex col-md-12">
-                    <div *ngIf="selectedVideo || selectedArticleAndVideo">
-                        <!-- <button class="select-btn">Upload Video</button> &nbsp;&nbsp;&nbsp; -->
-
+                <div class="buttons-holder d-flex col-md-12">
+                    <button class="upload-btn" (click)="uploadVideosBtn('videos')">Upload Videos</button>
+                    <button class="upload-btn" (click)="uploadImagesBtn('images')">Upload Images</button>
+                    <button class="upload-btn" (click)="uploadArticlesBtn('articles')">Select Article</button>
+                    <!-- <div>
                         <input type="file" (change)="selectVideo($event)" id="video-btn" hidden/>
-
-                        <!-- our custom upload button -->
-                        <label class="select-btn" for="video-btn">Upload Video</label> <span class="file-name-container input-text" *ngIf="videoname">{{videoname}}</span> &nbsp;&nbsp;&nbsp;
+                        <label class="select-btn" for="video-btn">Upload Video</label> <span class="file-name-container input-text" *ngIf="videoname">{{videoname}}</span>
                     </div>
-                    <div *ngIf="selectedArticle || selectedArticleAndVideo">
-                        <!-- <button class="select-btn">Select Article</button> &nbsp;&nbsp;&nbsp; -->
 
+                    <div>
+                        <input type="file" (change)="selectImage($event)" id="image-btn" hidden/>
+                        <label class="select-btn" for="image-btn">Upload Image</label> <span class="file-name-container input-text" *ngIf="imagename">{{imagename}}</span>
+                    </div>
+
+                    <div>
                         <input type="file" (change)="selectArticle($event)" id="article-btn" hidden/>
-
-                        <!-- our custom upload button -->
-                        <label class="select-btn" for="article-btn">Select Article</label> <span class="file-name-container input-text" *ngIf="articlename">{{articlename}}</span>&nbsp;&nbsp;&nbsp;
-                    </div>
+                        <label class="select-btn" for="article-btn">Select Article</label> <span class="file-name-container input-text" *ngIf="articlename">{{articlename}}</span>
+                    </div> -->
                 </div>
             </div>
 
-            <div class="row">
+
+            <!-- images table -->
+            <div class="images" *ngIf="imageInfo.length > 0">
+                <mat-label> &nbsp;&nbsp;&nbsp;Images</mat-label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>Caption</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let info of imageInfo, index as i">
+                            <td>{{info.image}}</td>
+                            <td>{{info.caption}}</td>
+                            <td class="actions d-flex justify-content-center">
+                                <mat-icon class="delete-icon" (click)="deleteImage(i)">delete</mat-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- videos table -->
+            <div class="videos" *ngIf="videoInfo.length > 0">
+                <mat-label> &nbsp;&nbsp;&nbsp;Videos</mat-label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>Caption</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let info of videoInfo, index as i">
+                            <td>{{info.video}}</td>
+                            <td>{{info.caption}}</td>
+                            <td class="actions d-flex justify-content-center">
+                                <mat-icon class="delete-icon" (click)="deleteVideo(i)">delete</mat-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- articles table -->
+            <div class="articles" *ngIf="articleInfo.length > 0">
+                <mat-label> &nbsp;&nbsp;&nbsp;Articles</mat-label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>Caption</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let info of articleInfo, index as i">
+                            <td>{{info.article}}</td>
+                            <td>{{info.caption}}</td>
+                            <td class="actions d-flex justify-content-center">
+                                <mat-icon class="delete-icon" (click)="deleteArticle(i)">delete</mat-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- <div class="row">
                 <div class="col-md-12">
                     <div class="d-flex">
                         <button class="select-btn"><span class="pin"><img src="./../../../../../assets/images/courses/you-will-need.svg"></span> &nbsp; You Will Need</button> &nbsp;&nbsp;&nbsp;
@@ -152,7 +215,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <br />
             <div class="row">

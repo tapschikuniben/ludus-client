@@ -51,6 +51,8 @@ import { NotifierService } from 'src/app/services/notifier.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FileUploadComponent } from './courses/file-upload/file-upload.component';
 import { PreferencesDialogComponent } from './courses/preferences-dialog/preferences-dialog.component';
+import { AddMediaDialogComponent } from './courses/add-media-dialog/add-media-dialog.component';
+import { ViewDailyCourseSessionComponent } from './courses/view-daily-course-session/view-daily-course-session.component';
 
 
 
@@ -74,7 +76,11 @@ import { PreferencesDialogComponent } from './courses/preferences-dialog/prefere
     ViewSessionDialogComponent,
     FileUploadComponent,
     PreferencesDialogComponent,
+    AddMediaDialogComponent,
+    ViewDailyCourseSessionComponent
   ],
+  // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [NotifierService],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -110,8 +116,6 @@ import { PreferencesDialogComponent } from './courses/preferences-dialog/prefere
     RouterModule,
     MaterialFileInputModule,
     MatSnackBarModule,
-  ],
-  // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
-  providers: [NotifierService],
+  ]
 })
 export class AdminModule { }

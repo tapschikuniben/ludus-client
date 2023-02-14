@@ -28,6 +28,6 @@
 
 </div>
 
-<div class="col-md-6 add-btn-holder">
+<div class="col-md-6 add-btn-holder" *ngIf="courses.length === 0">
     <button class="add-btn" (click)="addCourse()">Add Course</button> &nbsp;&nbsp;&nbsp;
 </div>

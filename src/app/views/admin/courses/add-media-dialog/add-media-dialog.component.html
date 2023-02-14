@@ -1,0 +1,160 @@
+<mat-dialog-content>
+    <div class="row">
+        <div class="header-holder col-md-12 d-flex justify-content-between align-items-center">
+            <span class="header">{{message}}</span>
+            <mat-icon (click)=" close()">close</mat-icon>
+        </div>
+    </div>
+    <div class="section-devider"></div>
+
+    <div class="file-upload">
+        <div class="file-upload-buttons d-flex" *ngIf="!preview">
+            <div *ngIf="data.mediaType == 'videos'">
+                <input type="file" (change)="selectVideo($event)" id="video-btn" hidden/>
+                <label class="select-btn" for="video-btn">Upload Video</label> <span class="file-name-container input-text" *ngIf="videoname">{{videoname}}</span>
+            </div>
+
+            <div *ngIf="data.mediaType == 'images'">
+                <input type="file" (change)="selectImage($event)" id="image-btn" hidden/>
+                <label class="select-btn" for="image-btn">Upload Image</label> <span class="file-name-container input-text" *ngIf="imagename">{{imagename}}</span>
+            </div>
+        </div>
+
+        <div class="file-upload-buttons d-flex" *ngIf="data.mediaType == 'articles'">
+            <div>
+                <input type="file" (change)="selectArticle($event)" id="article-btn" hidden/>
+                <label class="select-btn" for="article-btn">Select Article</label> <span class="file-name-container input-text article-name " *ngIf="articlename">{{articlename}}</span>
+            </div>
+        </div>
+
+        <!-- preview image -->
+        <div class="preview-holder d-flex justify-content-center" *ngIf="preview && data.mediaType == 'images'">
+            <div class="img-holder">
+                <div class="icon-holder d-flex justify-content-end">
+                    <mat-icon (click)=" removeImage()">delete</mat-icon>
+                </div>
+                <img [src]="preview" class="preview" width="100%">
+            </div>
+        </div>
+
+        <!-- preview video -->
+        <div class="preview-holder d-flex justify-content-center" *ngIf="preview && data.mediaType == 'videos'">
+            <div class="video-holder">
+                <div class="icon-holder d-flex justify-content-end">
+                    <mat-icon (click)=" removeVideo()">delete</mat-icon>
+                </div>
+
+                <video width="100%" controls>
+                  <source [src]="preview" type="video/mp4" width="100%">
+               </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <mat-label>Title</mat-label>
+        <div class="col-md-12 col-lg-12">
+            <input class="form-control input-text" placeholder="Title" [(ngModel)]="title" name="title" required>
+        </div>
+    </div>
+
+    <div class="row caption-holder">
+        <mat-label>Caption</mat-label>
+        <div class="col-md-12 col-lg-12">
+            <textarea class="form-control input-text" placeholder="Caption" [(ngModel)]="caption" name="caption" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" required></textarea>
+        </div>
+    </div>
+
+    <mat-label>Select you need.</mat-label>
+    <br />
+
+    <div class="options d-flex">
+        <div class="option d-flex align-items-center" (click)="selectAccessory('field')">
+            <div class="holder">
+                <img src="./../../../../../assets/images/courses/soccer-field.svg">
+                <div class="holder-text text-center"><span>{{accessories.fieldSize}}</span></div>
+            </div>
+        </div>
+        <div class="option d-flex align-items-center" (click)="selectAccessory('cone')">
+            <div class="holder">
+                <img src="./../../../../../assets/images/courses/cone.svg">
+                <div class="holder-text text-center"><span>{{accessories.coneNumber}}</span></div>
+            </div>
+        </div>
+        <div class="option d-flex align-items-center" (click)="selectAccessory('ball')">
+            <div class="holder">
+                <img src="./../../../../../assets/images/courses/football-ball.svg">
+                <div class="holder-text text-center"><span>{{accessories.ballNumber}}</span></div>
+            </div>
+        </div>
+        <div class="option d-flex align-items-center" (click)="selectAccessory('living room')">
+            <div class="holder">
+                <img src="./../../../../../assets/images/courses/living-room.svg">
+                <div class="holder-text text-center"><span>{{accessories.isLivingRoom}}</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="show_field">
+        <div class="col-lg-12 col-md-12">
+            <mat-label>Field</mat-label>
+            <mat-select class="form-control input-text" name="field_size" placeholder="Select Option" [(ngModel)]="fieldSize">
+                <mat-option class="input-text" value="1/3">1/3 Field</mat-option>
+                <mat-option class="input-text" value="1/4">1/4 Field</mat-option>
+                <mat-option class="input-text" value="1/2">1/2 Field</mat-option>
+                <mat-option class="input-text" value="3/4">3/4 Field</mat-option>
+                <mat-option class="input-text" value="Full">Full Field</mat-option>
+            </mat-select>
+        </div>
+
+        <div class="d-flex justify-content-start col-lg-12 col-md-12">
+            <button mat-button class="save-btn button-text" (click)="onFieldSize()">Update Option</button>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="show_cone">
+        <mat-label>Cones</mat-label>
+        <div class="col-lg-12 col-md-12">
+            <input class="form-control input-text" type="number" placeholder="Number of Cones" [(ngModel)]="coneNumber" name="cone">
+        </div>
+        <div class="d-flex justify-content-start col-lg-12 col-md-12">
+            <button mat-button class="save-btn button-text" (click)="onUpdateCone()">Update Option</button>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="show_ball">
+        <mat-label>Footballs</mat-label>
+        <div class="col-lg-12 col-md-12">
+            <input class="form-control input-text" type="number" placeholder="Number of Balls" [(ngModel)]="ballNumber" name="ball">
+        </div>
+        <div class="d-flex justify-content-start col-lg-12 col-md-12">
+            <button mat-button class="save-btn button-text" (click)="onUpdateBall()">Update Option</button>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="show_living_room">
+        <div class="col-lg-12 col-md-12">
+            <mat-label>Living Room</mat-label>
+            <mat-select class="form-control input-text" name="livingRoom" placeholder="Select Option" [(ngModel)]="isLivingRoom">
+                <mat-option class="input-text" value="Yes">Yes</mat-option>
+                <mat-option class="input-text" value="No">No</mat-option>
+            </mat-select>
+        </div>
+
+        <div class="d-flex justify-content-start col-lg-12 col-md-12">
+            <button mat-button class="save-btn button-text" (click)="onLivingRoom()">Update Option</button>
+        </div>
+    </div>
+
+    <div class="buttons-holder d-flex justify-content-end" *ngIf="preview && data.mediaType == 'images'">
+        <button class="confirm-btn" (click)="confirmImageUpload()">Confirm</button>
+    </div>
+
+    <div class="buttons-holder d-flex justify-content-end" *ngIf="preview && data.mediaType == 'videos'">
+        <button class="confirm-btn" (click)="confirmVideoUpload()">Confirm</button>
+    </div>
+
+    <div class="buttons-holder d-flex justify-content-end" *ngIf="articlename && data.mediaType == 'articles'">
+        <button class="confirm-btn" (click)="confirmArticleUpload()">Confirm</button>
+    </div>
+</mat-dialog-content>

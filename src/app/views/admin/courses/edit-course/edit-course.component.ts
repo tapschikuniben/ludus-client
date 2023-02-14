@@ -6,6 +6,7 @@ import { Course, CourseDaySession } from 'src/app/models/course.model';
 import { CourseService } from 'src/app/services/course.service';
 import { NotifierService } from 'src/app/services/notifier.service';
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { AddMediaDialogComponent } from '../add-media-dialog/add-media-dialog.component';
 import { ArticleVideoSelectDialogComponent } from '../article-video-select-dialog/article-video-select-dialog.component';
 import { PreferencesDialogComponent } from '../preferences-dialog/preferences-dialog.component';
 import { SelectDayDialogComponent } from '../select-day-dialog/select-day-dialog.component';
@@ -61,6 +62,15 @@ export class EditCourseComponent {
   public articleProcessComplete: boolean = false;
   public loading: boolean = false;
 
+  public imageInfo: any = [];
+  public returnedImageData: any = [];
+
+  public videoInfo: any = [];
+  public returnedVideoData: any = [];
+
+  public articleInfo: any = [];
+  public returnedArticleData: any = [];
+
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
@@ -100,6 +110,9 @@ export class EditCourseComponent {
       accessories: {},
       points_assigned: null,
       imageUrl: "",
+      imageInfo: [],
+      videoInfo: [],
+      articleInfo: [],
       videoUrl: "",
       articleUrl: "",
     }
@@ -130,7 +143,6 @@ export class EditCourseComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('deleted')
         this.deleteCourse(course);
       } else {
       }
@@ -209,8 +221,7 @@ export class EditCourseComponent {
   }
 
   viewSession(session: any, session_index: any) {
-    console.log("My session", session);
-    const dialogRef = this.dialog.open(ViewSessionDialogComponent, { width: '70%', height: '85%', data: { dailySession: session, sessionIndex: session_index, course_id: this.route.snapshot.paramMap.get('id') } });
+    const dialogRef = this.dialog.open(ViewSessionDialogComponent, { width: '90%', height: '85%', data: { dailySession: session, sessionIndex: session_index, course_id: this.route.snapshot.paramMap.get('id') } });
 
     dialogRef.updatePosition({
       top: '4%',
@@ -223,16 +234,12 @@ export class EditCourseComponent {
 
 
   saveDay(daySession: any) {
-
     this.loading = true;
 
     if (this.courseSession.day == 0) {
-      this.imageProcessComplete = true;
-      this.videoProcessComplete = true;
-      this.articleProcessComplete = true;
       this.selectedDayErr = "Select day for your course";
+      this.loading = false;
     }
-
 
     if (this.courseSession.day > 0) {
 
@@ -240,7 +247,7 @@ export class EditCourseComponent {
 
       this.courseService.updateCourse(this.course).subscribe(() => {
 
-        this.uploadImage().then(returned => {
+        this.uploadImages().then(returned => {
           if (returned) {
             this.imageProcessComplete = true;
           }
@@ -250,11 +257,25 @@ export class EditCourseComponent {
             this.notifier.Notification("success", "Session added successfully");
             this.getCourse();
             this.clearForm();
+
+            this.imageInfo = [];
+            this.returnedImageData = [];
+
+            this.videoInfo = [];
+            this.returnedVideoData = [];
+
+            this.articleInfo = [];
+            this.returnedArticleData = [];
+
+            this.imageProcessComplete = false;
+            this.videoProcessComplete = false;
+            this.articleProcessComplete = false;
           }
 
         }),
 
-          this.uploadVideo().then(returned => {
+          this.uploadVideos().then(returned => {
+
             if (returned) {
               this.videoProcessComplete = true;
             }
@@ -264,10 +285,24 @@ export class EditCourseComponent {
               this.notifier.Notification("success", "Session added successfully");
               this.getCourse();
               this.clearForm();
+
+              this.imageInfo = [];
+              this.returnedImageData = [];
+
+              this.videoInfo = [];
+              this.returnedVideoData = [];
+
+              this.articleInfo = [];
+              this.returnedArticleData = [];
+
+              this.imageProcessComplete = false;
+              this.videoProcessComplete = false;
+              this.articleProcessComplete = false;
             }
           }),
 
-          this.uploadArticle().then(returned => {
+          this.uploadArticles().then(returned => {
+
             if (returned) {
               this.articleProcessComplete = true;
             }
@@ -277,6 +312,19 @@ export class EditCourseComponent {
               this.notifier.Notification("success", "Session added successfully");
               this.getCourse();
               this.clearForm();
+
+              this.imageInfo = [];
+              this.returnedImageData = [];
+
+              this.videoInfo = [];
+              this.returnedVideoData = [];
+
+              this.articleInfo = [];
+              this.returnedArticleData = [];
+
+              this.imageProcessComplete = false;
+              this.videoProcessComplete = false;
+              this.articleProcessComplete = false;
             }
           })
       })
@@ -288,26 +336,68 @@ export class EditCourseComponent {
   }
 
 
-  uploadImage() {
+  uploadImages() {
     var promise = new Promise((resolve, reject) => {
 
-      if (this.selectedImageFiles) {
-        const file: File | null = this.selectedImageFiles.item(0);
+      if (this.returnedImageData.length > 0) {
 
-        if (file) {
-          this.currentFile = file;
-          this.courseService.uploadCourseImage(this.course, this.currentFile).subscribe((event: any) => {
+        this.returnedImageData.forEach((item: any, index: number) => {
 
-            if (event.body) {
-              console.log(event.body);
-              resolve(event.body)
-            }
+          const file: File | null = this.returnedImageData[index].image[0];
 
-          })
-        }
-        this.selectedImageFiles = undefined;
+          const image_data = {
+            caption: this.returnedImageData[index].caption,
+            title: this.returnedImageData[index].title,
+            accessories: this.returnedImageData[index].accessories,
+          }
+
+          if (file) {
+            this.currentFile = file;
+            this.courseService.uploadCourseImage(this.course, this.currentFile, image_data).subscribe((event: any) => {
+
+              if (event.body) {
+                resolve(event.body)
+              }
+            })
+            this.selectedImageFiles = undefined;
+          }
+        })
       } else {
-        resolve("empty")
+        resolve("empty");
+      }
+    });
+    return promise;
+
+  }
+
+  uploadVideos() {
+    var promise = new Promise((resolve, reject) => {
+
+      if (this.returnedVideoData.length > 0) {
+
+        this.returnedVideoData.forEach((item: any, index: number) => {
+
+          const file: File | null = this.returnedVideoData[index].video[0];
+
+          const video_data = {
+            caption: this.returnedVideoData[index].caption,
+            title: this.returnedVideoData[index].title,
+            accessories: this.returnedVideoData[index].accessories,
+          }
+
+          if (file) {
+            this.currentFile = file;
+            this.courseService.uploadCourseVideo(this.course, this.currentFile, video_data).subscribe((event: any) => {
+
+              if (event.body) {
+                resolve(event.body)
+              }
+            })
+            this.selectedVideoFiles = undefined;
+          }
+        })
+      } else {
+        resolve("empty");
       }
     });
     return promise;
@@ -315,54 +405,34 @@ export class EditCourseComponent {
   }
 
 
-  uploadVideo() {
-
+  uploadArticles() {
     var promise = new Promise((resolve, reject) => {
-      if (this.selectedVideoFiles) {
-        const videofile: File | null = this.selectedVideoFiles.item(0);
 
-        if (videofile) {
-          this.currentVideoFile = videofile;
-          this.courseService.uploadCourseVideo(this.course, this.currentVideoFile).subscribe((event: any) => {
-            if (event.body) {
-              console.log(event.body);
-              resolve(event.body)
-            }
+      if (this.returnedArticleData.length > 0) {
+
+        this.returnedArticleData.forEach((item: any, index: number) => {
+
+          const file: File | null = this.returnedArticleData[index].article[0];
+
+          const article_data = {
+            caption: this.returnedArticleData[index].caption,
+            title: this.returnedArticleData[index].title,
+            accessories: this.returnedArticleData[index].accessories,
           }
 
-          )
-        }
-        this.selectedVideoFiles = undefined;
-      } else {
-        resolve("empty")
-      }
-    });
-    return promise;
+          if (file) {
+            this.currentFile = file;
+            this.courseService.uploadCourseArticle(this.course, this.currentFile, article_data).subscribe((event: any) => {
 
-  }
-
-
-  uploadArticle() {
-
-    var promise = new Promise((resolve, reject) => {
-      if (this.selectedArticleFiles) {
-        const articlefile: File | null = this.selectedArticleFiles.item(0);
-
-        if (articlefile) {
-          this.currentArticleFile = articlefile;
-          this.courseService.uploadCourseArticle(this.course, this.currentArticleFile).subscribe((event: any) => {
-
-            if (event.body) {
-              console.log(event.body);
-              resolve(event.body)
-            }
+              if (event.body) {
+                resolve(event.body)
+              }
+            })
+            this.selectedArticleFiles = undefined;
           }
-
-          )
-        }
-        this.selectedArticleFiles = undefined;
+        })
       } else {
-        resolve("empty")
+        resolve("empty");
       }
     });
     return promise;
@@ -476,6 +546,84 @@ export class EditCourseComponent {
   }
 
 
+  uploadVideosBtn(media: any) {
+    const dialogRef = this.dialog.open(AddMediaDialogComponent, { width: '40%', height: '65%', data: { mediaType: media } });
+
+    dialogRef.updatePosition({
+      top: '4%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        const video_data = {
+          video: result.data.video[0].name,
+          caption: result.data.caption
+        }
+
+        this.videoInfo.push(video_data);
+        this.returnedVideoData.push(result.data)
+      }
+
+    });
+  }
+
+  uploadImagesBtn(media: any) {
+    const dialogRef = this.dialog.open(AddMediaDialogComponent, { width: '40%', height: '65%', data: { mediaType: media } });
+
+    dialogRef.updatePosition({
+      top: '4%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        const image_data = {
+          image: result.data.image[0].name,
+          caption: result.data.caption
+        }
+
+        this.imageInfo.push(image_data);
+        this.returnedImageData.push(result.data)
+      }
+
+    });
+  }
+
+  uploadArticlesBtn(media: any) {
+    const dialogRef = this.dialog.open(AddMediaDialogComponent, { width: '40%', height: '65%', data: { mediaType: media } });
+
+    dialogRef.updatePosition({
+      top: '4%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const article_data = {
+          article: result.data.article[0].name,
+          caption: result.data.caption
+        }
+
+        this.articleInfo.push(article_data);
+        this.returnedArticleData.push(result.data)
+      }
+    });
+  }
+
+
+
+  deleteImage(index: any) {
+    this.imageInfo.splice(index, 1);
+  }
+
+  deleteVideo(index: any) {
+    this.videoInfo.splice(index, 1);
+  }
+
+  deleteArticle(index: any) {
+    this.articleInfo.splice(index, 1);
+  }
+
   clearForm() {
     this.courseSession.day = 0;
     this.initCourseSession();
@@ -487,7 +635,5 @@ export class EditCourseComponent {
     this.imagename = '';
     this.articlename = '';
     this.videoname = '';
-
-    console.log(this.courseSession)
   }
 }

@@ -1,0 +1,134 @@
+mat-dialog-content {
+    padding: 10px !important;
+}
+
+.section-devider {
+    height: 3px;
+    background-color: #93C741;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+span.header {
+    color: #515A5A;
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
+}
+
+mat-label {
+    font-family: 'Poppins-Medium';
+    font-size: 13px;
+    color: #93C741;
+}
+
+mat-icon {
+    color: #93C741;
+    background-color: #f0f3f3;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.select-btn {
+    background-color: #93C741;
+    color: #ffffff;
+    border: none;
+    border-radius: 0px;
+    padding: 6px 12px;
+    font-family: 'Mulish-Regular';
+    font-size: 13px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.confirm-btn {
+    background-color: #757870;
+    color: #ffffff;
+    border: none;
+    border-radius: 0px;
+    padding: 6px 30px;
+    font-family: 'Mulish-Regular';
+    font-size: 16px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.buttons-holder {
+    margin-top: 25px;
+}
+
+.icon-holder {
+    margin-bottom: 10px;
+}
+
+.file-upload-buttons>div {
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.preview-holder {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.img-holder,
+.video-holder {
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 5px 32px 39px 21px rgba(0, 0, 0, 0.05);
+    width: 400px;
+}
+
+.form-control {
+    background-color: #d2eaaa !important;
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+    padding: 10px 20px;
+}
+
+.caption-holder {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.caption-holder ::-webkit-scrollbar {
+    width: 0;
+}
+
+.options .option {
+    margin-right: 25px;
+}
+
+.holder img {
+    cursor: pointer;
+}
+
+.holder span {
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+    color: #93C741;
+}
+
+.holder .holder-text {
+    margin-top: 10px;
+}
+
+.save-btn {
+    color: #ffffff !important;
+    border-radius: 0;
+    padding: 8px 30px;
+    margin-right: 7px;
+    border: none;
+    outline: none;
+    background-color: #c3ee7f;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.article-name {
+    padding-left: 15px;
+}

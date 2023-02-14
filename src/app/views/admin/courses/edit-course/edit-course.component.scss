@@ -61,6 +61,18 @@ form .row {
     cursor: pointer;
 }
 
+.upload-btn {
+    background-color: #93C741;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 30px;
+    font-family: 'Mulish-Regular';
+    font-size: 16px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
 .select-btn:disabled {
     background-color: #dce0da;
 }
@@ -190,4 +202,15 @@ th {
     color: #FF0000;
     font-family: 'Poppins-Regular';
     font-size: 12px;
+}
+
+.buttons-holder button {
+    margin-right: 15px;
+}
+
+.images,
+.videos,
+.articles {
+    margin-top: 50px;
+    margin-bottom: 50px;
 }

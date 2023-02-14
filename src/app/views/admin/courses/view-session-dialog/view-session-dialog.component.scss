@@ -1,3 +1,14 @@
+mat-icon {
+    color: #93C741;
+    background-color: #f0f3f3;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 form {
     width: 90%;
 }
@@ -62,14 +73,6 @@ form {
     line-height: 30px;
 }
 
-.options {
-    margin-left: 50px;
-}
-
-.options>div {
-    margin-right: 50px;
-}
-
 .pin img {
     height: 24px;
 }
@@ -114,6 +117,8 @@ mat-label {
     border-radius: 20px;
     padding: 20px;
     box-shadow: 5px 32px 39px 21px rgba(0, 0, 0, 0.05);
+    height: 65vh;
+    overflow: auto;
 }
 
 .article-link {
@@ -126,4 +131,68 @@ mat-label {
 
 .article-link-holder {
     margin-top: 25px;
+}
+
+.media-holder .media-card {
+    width: calc((100% / 2) - 10px);
+    margin-bottom: 50px;
+}
+
+mat-card-title {
+    font-family: 'Poppins-Medium';
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.vid-content {
+    margin-top: 30px;
+    font-family: 'Mulish-Regular';
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.options {
+    margin-top: 30px;
+}
+
+.options .option {
+    margin-right: 25px;
+}
+
+.holder img {
+    cursor: pointer;
+}
+
+.holder span {
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+    color: #93C741;
+}
+
+.holder .holder-text {
+    margin-top: 10px;
+}
+
+.cards-header {
+    margin-bottom: 10px;
+}
+
+.cards-header span {
+    font-family: 'Poppins-Medium';
+    font-size: 16px;
+    color: #000000;
+}
+
+
+/**************************************
+ scrobar starts
+ **************************************/
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+::-webkit-scrollbar:horizontal {
+    display: none;
 }

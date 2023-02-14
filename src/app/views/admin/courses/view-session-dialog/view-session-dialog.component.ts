@@ -16,7 +16,7 @@ interface SessionCategory {
 })
 export class ViewSessionDialogComponent {
 
-  public courseSession!: CourseDaySession;
+  public courseSession: any;
   public selectedArticle = false;
   public selectedVideo = false;
   public selectedArticleAndVideo = true;
@@ -56,6 +56,9 @@ export class ViewSessionDialogComponent {
       accessories: [],
       points_assigned: 0,
       imageUrl: '',
+      imageInfo: [],
+      videoInfo: [],
+      articleInfo: [],
       videoUrl: '',
       articleUrl: '',
     }
@@ -66,7 +69,7 @@ export class ViewSessionDialogComponent {
       this.course = returned;
 
       this.courseSession = this.course.course_daily_sessions[this.data.sessionIndex]
-
+      console.log("course session", this.courseSession)
     })
   }
 
@@ -89,6 +92,14 @@ export class ViewSessionDialogComponent {
       this.dialogRef.close();
     })
 
+  }
+
+  selectAccessory(accessory: any) {
+
+  }
+
+  close() {
+    this.dialogRef.close()
   }
 
 }

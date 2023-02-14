@@ -1,6 +1,7 @@
 <div class="header-holder row">
-    <div class="col-md-12">
+    <div class="col-md-12 d-flex justify-content-between align-items-center">
         <mat-label class="header">Session for the Day</mat-label>
+        <mat-icon (click)="close()">close</mat-icon>
     </div>
 </div>
 
@@ -9,7 +10,7 @@
 </div>
 
 <div class="col-md-12 row">
-    <div class="form-holder course-detail d-flex justify-content-center col-lg-8 col-md-8">
+    <div class="form-holder course-detail d-flex justify-content-center col-lg-6 col-md-6">
         <form class="needs-validation" #f="ngForm">
             <div class="row">
                 <mat-label> &nbsp;&nbsp;&nbsp;Select Category</mat-label>
@@ -67,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-12">
                     <div class="d-flex">
                         <button class="select-btn"><span class="pin"><img src="./../../../../../assets/images/courses/you-will-need.svg"></span> &nbsp; You Will Need</button> &nbsp;&nbsp;&nbsp;
@@ -80,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <br />
             <div class="row">
@@ -94,25 +95,89 @@
     </div>
 
 
-    <div class="media col-lg-4 col-md-4">
-        <div class="row" *ngIf="courseSession.videoUrl">
-            <div class="col-md-12 col-lg-12">
-                <video width="100%" controls>
-                  <source [src]="courseSession.videoUrl" type="video/mp4" height="400px">
+    <div class="media col-lg-6 col-md-6">
+        <!-- show videos -->
+        <div class="cards-header"><span>Vedios</span></div>
+        <div class="row media-holder d-flex justify-content-between">
+            <mat-card class="media-card" *ngFor="let vid of courseSession.videoInfo">
+                <mat-card-header>
+                    <mat-card-title>{{vid.title}}</mat-card-title>
+                </mat-card-header>
+                <video width="100%" height="300px" controls>
+                  <source [src]="vid.videoUrl" type="video/mp4" width="100%">
                </video>
-            </div>
+                <mat-card-content>
+                    <div class="vid-content">{{vid.caption}}</div>
+
+                    <div class="options d-flex">
+                        <div class="option d-flex align-items-center" (click)="selectAccessory('field')">
+                            <div class="holder">
+                                <img src="./../../../../../assets/images/courses/soccer-field.svg">
+                                <div class="holder-text text-center"><span>{{vid.accessories.fieldSize}}</span></div>
+                            </div>
+                        </div>
+                        <div class="option d-flex align-items-center" (click)="selectAccessory('cone')">
+                            <div class="holder">
+                                <img src="./../../../../../assets/images/courses/cone.svg">
+                                <div class="holder-text text-center"><span>{{vid.accessories.coneNumber}}</span></div>
+                            </div>
+                        </div>
+                        <div class="option d-flex align-items-center" (click)="selectAccessory('ball')">
+                            <div class="holder">
+                                <img src="./../../../../../assets/images/courses/football-ball.svg">
+                                <div class="holder-text text-center"><span>{{vid.accessories.ballNumber}}</span></div>
+                            </div>
+                        </div>
+                        <div class="option d-flex align-items-center" (click)="selectAccessory('living room')">
+                            <div class="holder">
+                                <img src="./../../../../../assets/images/courses/living-room.svg">
+                                <div class="holder-text text-center"><span>{{vid.accessories.isLivingRoom}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </div>
 
-        <div class="row" *ngIf="courseSession.imageUrl">
-            <div class="col-md-12 col-lg-12">
-                <img [src]="courseSession.imageUrl" width="100%" height="400px">
-            </div>
-        </div>
+        <!-- show images -->
+        <div class="cards-header"><span>Images</span></div>
+        <div class="row media-holder d-flex justify-content-between">
+            <mat-card class="media-card" *ngFor="let img of courseSession.imageInfo">
+                <mat-card-header>
+                    <mat-card-title>{{img.title}}</mat-card-title>
+                </mat-card-header>
+                <img source [src]="img.imageUrl" width="100%" height="300px">
+                <mat-card-content>
+                    <div class="vid-content">{{img.caption}}</div>
 
-        <div class="row" *ngIf="courseSession.articleUrl">
-            <div class="article-link-holder col-md-12 col-lg-12">
-                <a class="article-link" [href]="courseSession.articleUrl" target="_blank">Article FIle</a>
-            </div>
+                    <div class="options d-flex">
+                        <div class="option d-flex align-items-center" (click)="selectAccessory('field')">
+                            <div class="holder">
+                                <img src="./../../../../../assets/images/courses/soccer-field.svg">
+                                <div class="holder-text text-center"><span>{{img.accessories.fieldSize}}</span></div>
+                            </div>
+                        </div>
+                        <div class="option d-flex align-items-center" (click)="selectAccessory('cone')">
+                            <div class="holder">
+                                <img src="./../../../../../assets/images/courses/cone.svg">
+                                <div class="holder-text text-center"><span>{{img.accessories.coneNumber}}</span></div>
+                            </div>
+                        </div>
+                        <div class="option d-flex align-items-center" (click)="selectAccessory('ball')">
+                            <div class="holder">
+                                <img src="./../../../../../assets/images/courses/football-ball.svg">
+                                <div class="holder-text text-center"><span>{{img.accessories.ballNumber}}</span></div>
+                            </div>
+                        </div>
+                        <div class="option d-flex align-items-center" (click)="selectAccessory('living room')">
+                            <div class="holder">
+                                <img src="./../../../../../assets/images/courses/living-room.svg">
+                                <div class="holder-text text-center"><span>{{img.accessories.isLivingRoom}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </div>

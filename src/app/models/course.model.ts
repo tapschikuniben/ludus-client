@@ -10,6 +10,9 @@ export interface CourseDaySession {
     accessories: [] | any;
     points_assigned: number | null;
     imageUrl: string;
+    imageInfo: [];
+    videoInfo: [];
+    articleInfo: [];
     videoUrl: string;
     articleUrl: string;
 }
